@@ -15,6 +15,7 @@ from fig_table_views import create_table
 from fig_image import make_image, prepare_data
 
 channels, posts, reactions, subscribers, views = load_data()
+@st.cache_data
 processed_data = process_data(channels, posts, reactions, subscribers, views)
 
 st.set_page_config(layout="wide", page_icon="🅢",)
