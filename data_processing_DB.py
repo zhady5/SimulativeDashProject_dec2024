@@ -5,7 +5,7 @@ from dateutil.relativedelta import relativedelta
 import math
 from dotenv import load_dotenv
 
-load_dotenv() 
+load_dotenv(dotenv_path='.gitignore/.env') 
 
 def load_data():
     DB_NAME = os.environ.get('DB_NAME')
