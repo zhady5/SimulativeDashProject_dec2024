@@ -23,7 +23,7 @@ def create_table(post_view, max_days, channel):
         
         row_data = [
             row['post_id'],
-            datetime.astype(str).strptime(row['post_datetime'], '%Y-%m-%d %H:%M:%S.%f').strftime('%b %d, %Y'),
+            datetime.strptime(str(row['post_datetime']), '%Y-%m-%d %H:%M:%S.%f').strftime('%b %d, %Y'),
             current_views
         ]
         for day in range(1, max_days+1):
