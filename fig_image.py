@@ -33,7 +33,7 @@ def clean_text(text):
     return words
     
 
-@st.cache
+@st.cache_data
 def prepare_data(posts, channel):
     posts_channel = posts[posts['channel_name'] == channel]
     words = posts_channel.text.apply(lambda t: clean_text(t)).tolist()
