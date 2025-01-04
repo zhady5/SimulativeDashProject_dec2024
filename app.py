@@ -190,13 +190,13 @@ def main():
 
         # Фильтрация данных в зависимости от выбранной кнопки
         if st.session_state.button_state == "3д":
-            filtered_bubble = gr_pvr[(gr_pvr.channel_name == selected_channel)&(pd.to_datetime(gr_pvr.post_datetime.str[:10])>=date_ago('days', 2))]  
+            filtered_bubble = gr_pvr[(gr_pvr.channel_name == selected_channel)&(pd.to_datetime(gr_pvr.post_datetime)>=date_ago('days', 2))]  
         elif st.session_state.button_state == "1н":
-            filtered_bubble = gr_pvr[(gr_pvr.channel_name == selected_channel)&(pd.to_datetime(gr_pvr.post_datetime.str[:10])>=date_ago('weeks', 1))]
+            filtered_bubble = gr_pvr[(gr_pvr.channel_name == selected_channel)&(pd.to_datetime(gr_pvr.post_datetime)>=date_ago('weeks', 1))]
         elif st.session_state.button_state == "1м":
-            filtered_bubble = gr_pvr[(gr_pvr.channel_name == selected_channel)&(pd.to_datetime(gr_pvr.post_datetime.str[:10])>=date_ago('months', 1))]
+            filtered_bubble = gr_pvr[(gr_pvr.channel_name == selected_channel)&(pd.to_datetime(gr_pvr.post_datetime)>=date_ago('months', 1))]
         else:  # "all (6м)"
-            filtered_bubble = gr_pvr[(gr_pvr.channel_name == selected_channel)&(pd.to_datetime(gr_pvr.post_datetime.str[:10])>=date_ago('months', 6))]
+            filtered_bubble = gr_pvr[(gr_pvr.channel_name == selected_channel)&(pd.to_datetime(gr_pvr.post_datetime)>=date_ago('months', 6))]
         
         fig_bubble = create_bubble_fig(filtered_bubble)
         st.plotly_chart(fig_bubble, use_container_width=True)
