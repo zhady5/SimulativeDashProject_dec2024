@@ -4,6 +4,8 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import math
 from dotenv import load_dotenv
+import psycopg2
+from psycopg2 import sql
 
 load_dotenv(dotenv_path='.gitignore/.env') 
 
