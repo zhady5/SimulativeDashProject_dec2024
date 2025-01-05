@@ -18,7 +18,8 @@ def load_data():
     else:
         # Получаем список всех файлов и каталогов внутри 'data'
         files_and_dirs = os.listdir(data_path)
-        file_list = sorted([f for f in os.listdir(files_and_dirs) if f.endswith('.csv')])
+        file_list = sorted([f for f in files_and_dirs if os.path.isfile(os.path.join(data_path, f))])
+        #file_list = sorted([f for f in os.listdir(files_and_dirs) if f.endswith('.csv')])
         
         
     #folder_path = os.getcwd()
