@@ -5,8 +5,24 @@ from dateutil.relativedelta import relativedelta
 import math
 
 def load_data():
-    folder_path = os.getcwd()
-    file_list = sorted([f for f in os.listdir(folder_path) if f.endswith('.csv')])
+    import os
+
+    # Получаем текущую рабочую директорию
+    current_dir = os.getcwd()
+    # Путь к папке 'data' относительно текущей директории
+    data_path = os.path.join(current_dir, "data")
+    
+    # Проверяем существование папки 'data'
+    if not os.path.exists(data_path):
+        print(f"Папка {data_path} не существует.")
+    else:
+        # Получаем список всех файлов и каталогов внутри 'data'
+        files_and_dirs = os.listdir(data_path)
+        file_list = sorted([f for f in os.listdir(files_and_dirs) if f.endswith('.csv')])
+        
+        
+    #folder_path = os.getcwd()
+    #file_list = sorted([f for f in os.listdir(folder_path) if f.endswith('.csv')])
     
     channels = pd.read_csv(os.path.join(folder_path, file_list[0]))
     posts = pd.read_csv(os.path.join(folder_path, file_list[1]))
