@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 from datetime import date
 
-from data_processing_DB import load_data, process_data
+from data_processing import load_data, process_data
 from functions import date_ago, convert_date, get_gradient_color, get_current_previous_sums,  hex_to_rgb, \
     interpolate_color, gradient_color_func, calculate_mean_max_subs, calculate_mean_posts, calculate_mean_views, \
     calculate_mean_reacts, load_stopwords_from_file
