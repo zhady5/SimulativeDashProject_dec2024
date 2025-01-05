@@ -10,15 +10,15 @@ def load_data():
     # Получаем текущую рабочую директорию
     current_dir = os.getcwd()
     # Путь к папке 'data' относительно текущей директории
-    data_path = os.path.join(current_dir, "data")
+    folder_path = os.path.join(current_dir, "data")
     
     # Проверяем существование папки 'data'
-    if not os.path.exists(data_path):
-        print(f"Папка {data_path} не существует.")
+    if not os.path.exists(folder_path):
+        print(f"Папка {folder_path} не существует.")
     else:
         # Получаем список всех файлов и каталогов внутри 'data'
-        files_and_dirs = os.listdir(data_path)
-        file_list = sorted([f for f in files_and_dirs if os.path.isfile(os.path.join(data_path, f))])
+        files_and_dirs = os.listdir(folder_path)
+        file_list = sorted([f for f in files_and_dirs if os.path.isfile(os.path.join(folder_path, f))])
         #file_list = sorted([f for f in os.listdir(files_and_dirs) if f.endswith('.csv')])
         
         
