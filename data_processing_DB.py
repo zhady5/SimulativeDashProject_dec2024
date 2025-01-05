@@ -9,6 +9,8 @@ from psycopg2 import sql
 
 load_dotenv(dotenv_path='.gitignore/.env') 
 
+
+@st.cache(ttl=timedelta(minutes=5))
 def load_data():
     DB_NAME = os.environ.get('DB_NAME')
     USER = os.environ.get('DB_USER')
@@ -73,6 +75,8 @@ def load_data():
 
     return channels, posts, reactions, subscribers, views
 
+
+@st.cache(ttl=timedelta(minutes=5))
 def process_data(channels, posts, reactions, subscribers, views):
     # Process posts
     posts = process_posts(posts, channels)
