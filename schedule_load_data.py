@@ -14,8 +14,14 @@ import io
 #import base64
 #import requests
 #import json
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 
 load_dotenv(dotenv_path='.gitignore/.env') 
+
 
 # Функция для подключения к базе данных
 def connect_to_db():
