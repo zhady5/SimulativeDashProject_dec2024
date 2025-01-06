@@ -195,7 +195,13 @@ def job():
     except Exception as e:
         print(f"Ошибка при выполнении задания: {e}")
 
-job()
+#job()
+
+
+if __name__ == "__main__":
+    print("Скрипт начал выполнение")
+    job()
+    print("Скрипт завершил выполнение")
 #schedule.every(3).minutes.do(job)
 #schedule.every().day.at("16:12").do(job)
 #schedule.every().day.at(utc_time(20, 39)).do(job)
