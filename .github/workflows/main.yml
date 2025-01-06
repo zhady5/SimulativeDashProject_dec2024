@@ -2,7 +2,8 @@ name: Scheduled Task
 
 on:
   schedule:
-    - cron: '0 */4 * * *'  # Запуск каждые 4 часа
+    #- cron: '0 */4 * * *'  # Запуск каждые 4 часа
+    - cron: '*/2 * * * *'  # Запуск каждые 4 часа
   workflow_dispatch:  # Позволяет запускать workflow вручную
 
 jobs:
