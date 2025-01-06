@@ -113,7 +113,7 @@ def upload_to_github(encoded_data, repo_owner, repo_name, branch, github_token, 
         delete_response = requests.delete(delete_url, data=json.dumps(delete_payload), headers=headers)
         if delete_response.status_code == 200:
             print(f"Старый файл {file_path} удалён!")
-            logger.info((f"Старый файл {file_path} удалён!")
+            logger.info(f"Старый файл {file_path} удалён!")
             logger.info()
         else:
             print(f"Ошибка при удалении старого файла {file_path}: {delete_response.text}")
