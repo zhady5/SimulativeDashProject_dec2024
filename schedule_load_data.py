@@ -22,6 +22,28 @@ logger = logging.getLogger(__name__)
 
 #load_dotenv(dotenv_path='.gitignore/.env') 
 
+print("Значения переменных окружения:")
+for key, value in os.environ.items():
+    if key.startswith('DB_'):
+        print(f"{key}: {'*' * len(value)}")  # Маскируем значение для безопасности
+    elif key == 'GITHUB_TOKEN':
+        print(f"{key}: {'*' * len(value)}")  # Маскируем значение для безопасности
+    else:
+        print(f"{key}: {value}")
+
+print(f"Тип DB_PORT: {type(os.environ.get('DB_PORT'))}")
+print(f"Значение DB_PORT: {os.environ.get('DB_PORT')}")
+
+DB_PORT = os.environ.get('DB_PORT')
+if DB_PORT is not None:
+    try:
+        DB_PORT = int(DB_PORT)
+    except ValueError:
+        print(f"Ошибка при преобразовании DB_PORT '{DB_PORT}' в целое число")
+        DB_PORT = 5432  # Используем значение по умолчанию
+else:
+    print("DB_PORT не установлен, используем значение по умолчанию")
+    DB_PORT = 5432  # Используем значение по умолчанию
 
 # Функция для подключения к базе данных
 def connect_to_db():
