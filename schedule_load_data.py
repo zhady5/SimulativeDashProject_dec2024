@@ -196,25 +196,8 @@ def job():
         print(f"Ошибка при выполнении задания: {e}")
 
 
-# Расписание задач в Московском времени (GMT+3)
-utc_offset = 2  # Разница между Московским временем и Екатеринбургским временем
-# Преобразуем время в UTC
-def utc_time(hour, mins=0):
-    now_utc = datetime.utcnow()
-    target_hour = hour + utc_offset
-    if target_hour > 24:
-        target_hour -= 24
-    return str(now_utc.replace(hour=target_hour, minute=mins, second=0, microsecond=0))[11:16]
-
-
-# Настраиваем расписание
-schedule.every().day.at(utc_time(1)).do(job)
-schedule.every().day.at(utc_time(5)).do(job)
-schedule.every().day.at(utc_time(9)).do(job)
-schedule.every().day.at(utc_time(13)).do(job)
-schedule.every().day.at(utc_time(17)).do(job)
-schedule.every().day.at(utc_time(21)).do(job)
-schedule.every().day.at(utc_time(20, 39)).do(job)
+schedule.every().day.at("21:07").do(job)
+#schedule.every().day.at(utc_time(20, 39)).do(job)
 
 while True:
     schedule.run_pending()
