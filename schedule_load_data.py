@@ -11,7 +11,7 @@ import io
 #import schedule
 #import time
 #import csv
-#import base64
+import base64
 #import requests
 #import json
 import logging
