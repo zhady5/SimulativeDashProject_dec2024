@@ -8,12 +8,12 @@ import psycopg2
 from psycopg2 import sql
 import io
 
-import schedule
-import time
-import csv
-import base64
-import requests
-import json
+#import schedule
+#import time
+#import csv
+#import base64
+#import requests
+#import json
 
 load_dotenv(dotenv_path='.gitignore/.env') 
 
