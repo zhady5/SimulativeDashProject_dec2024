@@ -20,10 +20,10 @@ jobs:
         pip install pandas psycopg2-binary python-dotenv requests
     - name: Run script
       env:
-        DB_NAME: "Telegram_stat" #${{ secrets.DB_NAME }}
-        DB_USER: "postgres" #${{ secrets.DB_USER }}
-        DB_PASSWORD: "hA7Oqhh76Aj2D3" #${{ secrets.DB_PASSWORD }}
-        DB_HOST: "89.104.71.27" #${{ secrets.DB_HOST }}
-        DB_PORT: 5432 #${{ secrets.DB_PORT }}
-        GITHUB_TOKEN: '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' #${{ secrets.GITHUB_TOKEN }}
+        DB_NAME: ${{ secrets.DB_NAME }}
+        DB_USER: ${{ secrets.DB_USER }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_PORT: ${{ secrets.DB_PORT }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: python schedule_load_data.py
