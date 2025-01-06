@@ -195,7 +195,7 @@ def job():
     except Exception as e:
         print(f"Ошибка при выполнении задания: {e}")
 
-
+job()
 #schedule.every(3).minutes.do(job)
 #schedule.every().day.at("16:12").do(job)
 #schedule.every().day.at(utc_time(20, 39)).do(job)
