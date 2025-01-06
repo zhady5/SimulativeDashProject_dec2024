@@ -196,13 +196,13 @@ def job():
         print(f"Ошибка при выполнении задания: {e}")
 
 
-schedule.every(3).minutes.do(job)
+#schedule.every(3).minutes.do(job)
 #schedule.every().day.at("16:12").do(job)
 #schedule.every().day.at(utc_time(20, 39)).do(job)
 
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+#while True:
+#    schedule.run_pending()
+#    time.sleep(1)
 
 
 
