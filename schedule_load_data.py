@@ -20,7 +20,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-load_dotenv(dotenv_path='.gitignore/.env') 
+#load_dotenv(dotenv_path='.gitignore/.env') 
 
 
 # Функция для подключения к базе данных
@@ -88,15 +88,13 @@ def upload_to_github(encoded_data, repo_owner, repo_name, branch, github_token, 
 
     temp_response = requests.put(temp_update_url, data=json.dumps(temp_payload), headers=headers)
     if temp_response.status_code not in (200, 201):
-        print(f"Ошибка при создании временного файла {temp_file_path}: {temp_response.text}")
-        logger.info(f"Ошибка при создании временного файла {temp_file_path}: {temp_response.text}")
-        logger.info()
+        #print(f"Ошибка при создании временного файла {temp_file_path}: {temp_response.text}")
+        logger.info('Ошибка при создании временного файла')
         temp_response.raise_for_status()
     else:
-        print(f"Временный файл {temp_file_path} успешно создан!")
+        #print(f"Временный файл {temp_file_path} успешно создан!")
         logger.info(f"Временный файл {temp_file_path} успешно создан!")
-        logger.info()
-
+        
     # Проверяем существование основного файла
     content_url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}"
     content_response = requests.get(content_url, headers=headers, params={"ref": branch})
@@ -112,13 +110,11 @@ def upload_to_github(encoded_data, repo_owner, repo_name, branch, github_token, 
         }
         delete_response = requests.delete(delete_url, data=json.dumps(delete_payload), headers=headers)
         if delete_response.status_code == 200:
-            print(f"Старый файл {file_path} удалён!")
+            #print(f"Старый файл {file_path} удалён!")
             logger.info(f"Старый файл {file_path} удалён!")
-            logger.info()
         else:
-            print(f"Ошибка при удалении старого файла {file_path}: {delete_response.text}")
+            #print(f"Ошибка при удалении старого файла {file_path}: {delete_response.text}")
             logger.info(f"Ошибка при удалении старого файла {file_path}: {delete_response.text}")
-            logger.info()
             delete_response.raise_for_status()
             
 
@@ -132,13 +128,12 @@ def upload_to_github(encoded_data, repo_owner, repo_name, branch, github_token, 
     }
     rename_response = requests.put(rename_url, data=json.dumps(rename_payload), headers=headers)
     if rename_response.status_code in (200, 201):
-        print(f"Временный файл переименован в {file_path}. Данные обновлены!")
+        #print(f"Временный файл переименован в {file_path}. Данные обновлены!")
         logger.info(f"Временный файл переименован в {file_path}. Данные обновлены!")
-        logger.info()
+
     else:
-        print(f"Ошибка при переименовании файла: {rename_response.text}")
+        #print(f"Ошибка при переименовании файла: {rename_response.text}")
         logger.info(f"Ошибка при переименовании файла: {rename_response.text}")
-        logger.info()
         rename_response.raise_for_status()
 
     # Удаляем временный файл, если он остался
@@ -150,13 +145,11 @@ def upload_to_github(encoded_data, repo_owner, repo_name, branch, github_token, 
     }
     delete_temp_response = requests.delete(delete_temp_url, data=json.dumps(delete_temp_payload), headers=headers)
     if delete_temp_response.status_code == 200:
-        print(f"Временный файл {temp_file_path} удалён.")
+        #print(f"Временный файл {temp_file_path} удалён.")
         logger.info(f"Временный файл {temp_file_path} удалён.")
-        logger.info()
     else:
-        print(f"Произошла ошибка при удалении временного файла: {delete_temp_response.text}")
+        #print(f"Произошла ошибка при удалении временного файла: {delete_temp_response.text}")
         logger.info(f"Произошла ошибка при удалении временного файла: {delete_temp_response.text}")
-        logger.info()
 
     return rename_response.json()
 
@@ -224,9 +217,8 @@ def job():
             upload_to_github(csv_data, repo_owner, repo_name, branch, github_token, file_path)
 
     except Exception as e:
-        print(f"Ошибка при выполнении задания: {e}")
+        #print(f"Ошибка при выполнении задания: {e}")
         logger.info(f"Ошибка при выполнении задания: {e}")
-        logger.info()
 
 #job()
 
