@@ -17,9 +17,6 @@ import json
 
 load_dotenv(dotenv_path='.gitignore/.env') 
 
-# Расписание задач в Московском времени (GMT+3)
-utc_offset = 5  # Разница между GMT и Московским временем
-
 # Функция для подключения к базе данных
 def connect_to_db():
     db_name = os.environ.get('DB_NAME')
@@ -199,13 +196,15 @@ def job():
         print(f"Ошибка при выполнении задания: {e}")
 
 
+# Расписание задач в Московском времени (GMT+3)
+utc_offset = 2  # Разница между Московским временем и Екатеринбургским временем
 # Преобразуем время в UTC
-def utc_time(hour):
+def utc_time(hour, mins=0):
     now_utc = datetime.utcnow()
-    target_hour = hour - utc_offset
-    if target_hour < 0:
-        target_hour += 24
-    return now_utc.replace(hour=target_hour, minute=0, second=0, microsecond=0)
+    target_hour = hour + utc_offset
+    if target_hour > 24:
+        target_hour -= 24
+    return str(now_utc.replace(hour=target_hour, minute=mins, second=0, microsecond=0))[11:16]
 
 
 # Настраиваем расписание
