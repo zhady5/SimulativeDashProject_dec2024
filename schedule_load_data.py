@@ -202,7 +202,7 @@ schedule.every(3).minutes.do(job)
 
 while True:
     schedule.run_pending()
-    time.sleep(60)
+    time.sleep(1)
 
 
 
