@@ -22,32 +22,7 @@ logger = logging.getLogger(__name__)
 
 #load_dotenv(dotenv_path='.gitignore/.env') 
 
-print("Значения переменных окружения:")
-for key, value in os.environ.items():
-    if key.startswith('DB_'):
-        print(f"{key}: {'*' * len(value)}")  # Маскируем значение для безопасности
-    elif key == 'GITHUB_TOKEN':
-        print(f"{key}: {'*' * len(value)}")  # Маскируем значение для безопасности
-    else:
-        print(f"{key}: {value}")
 
-print(f"Тип DB_PORT: {type(os.environ.get('DB_PORT'))}")
-print(f"Значение DB_PORT: {os.environ.get('DB_PORT')}")
-
-print(f"DB_HOST: {os.environ.get('DB_HOST')}")
-print(f"DB_NAME: {os.environ.get('DB_NAME')}")
-print(f"DB_USER: {os.environ.get('DB_USER')}")
-
-DB_PORT = os.environ.get('DB_PORT')
-if DB_PORT is not None:
-    try:
-        DB_PORT = int(DB_PORT)
-    except ValueError:
-        print(f"Ошибка при преобразовании DB_PORT '{DB_PORT}' в целое число")
-        DB_PORT = 5432  # Используем значение по умолчанию
-else:
-    print("DB_PORT не установлен, используем значение по умолчанию")
-    DB_PORT = 5432  # Используем значение по умолчанию
 
 # Функция для подключения к базе данных
 def connect_to_db():
@@ -184,9 +159,11 @@ def job():
     try:
         conn = connect_to_db()
         cursor = conn.cursor()
-
+        print('cursor')
+        
         six_month_ago = datetime.now() - timedelta(days=180)
 
+        print(six_month_ago)
         # CHANNELS
         channels = fetch_dataframe(cursor, "SELECT * FROM channels")
         channels_csv = dataframe_to_csv(channels)
@@ -223,7 +200,7 @@ def job():
 
         cursor.close()
         conn.close()
-
+        print('conn_close')
         # Загрузка данных в репозиторий GitHub
         github_token = os.environ.get("GITHUB_TOKEN")
         repo_owner = "zhady5"
@@ -239,6 +216,7 @@ def job():
         }
 
         for table, file_path in file_paths.items():
+            print(table)
             csv_data = locals()[f"{table}_csv"]
             upload_to_github(csv_data, repo_owner, repo_name, branch, github_token, file_path)
 
@@ -246,13 +224,16 @@ def job():
         #print(f"Ошибка при выполнении задания: {e}")
         logger.info(f"Ошибка при выполнении задания: {e}")
 
-#job()
+
 
 
 if __name__ == "__main__":
     print("Скрипт начал выполнение")
     job()
     print("Скрипт завершил выполнение")
+
+
+
 #schedule.every(3).minutes.do(job)
 #schedule.every().day.at("16:12").do(job)
 #schedule.every().day.at(utc_time(20, 39)).do(job)
