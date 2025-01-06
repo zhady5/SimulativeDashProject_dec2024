@@ -9,11 +9,11 @@ from psycopg2 import sql
 import io
 
 #import schedule
-#import time
-#import csv
+import time
+import csv
 import base64
-#import requests
-#import json
+import requests
+import json
 import logging
 
 logging.basicConfig(level=logging.INFO)
