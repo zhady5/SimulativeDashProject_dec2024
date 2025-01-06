@@ -214,7 +214,7 @@ schedule.every().day.at(utc_time(9)).do(job)
 schedule.every().day.at(utc_time(13)).do(job)
 schedule.every().day.at(utc_time(17)).do(job)
 schedule.every().day.at(utc_time(21)).do(job)
-schedule.every().day.at(utc_time(18, 30)).do(job)
+schedule.every().day.at(utc_time(20, 39)).do(job)
 
 while True:
     schedule.run_pending()
