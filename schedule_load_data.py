@@ -34,6 +34,10 @@ for key, value in os.environ.items():
 print(f"Тип DB_PORT: {type(os.environ.get('DB_PORT'))}")
 print(f"Значение DB_PORT: {os.environ.get('DB_PORT')}")
 
+print(f"DB_HOST: {os.environ.get('DB_HOST')}")
+print(f"DB_NAME: {os.environ.get('DB_NAME')}")
+print(f"DB_USER: {os.environ.get('DB_USER')}")
+
 DB_PORT = os.environ.get('DB_PORT')
 if DB_PORT is not None:
     try:
