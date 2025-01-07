@@ -270,7 +270,8 @@ def main():
         df_subset = df[columns_to_show]
         html_table = styled_df(df_subset).to_html()
         # Оборачиваем таблицу в div с фиксированной шириной и прокруткой
-        scrollable_table = f'<div style="overflow-x:auto;">{html_table}</div>'
+        #scrollable_table = f'<div style="overflow-x:auto;">{html_table}</div>'
+        scrollable_table = f'<div style="overflow-x: auto; overflow-y: auto; max-height: 300px;">{html_table}</div>'
         st.write(scrollable_table, unsafe_allow_html=True)
         #---------------------------------------------------------------------------------------------------------------------
         #Поисковик
