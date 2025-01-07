@@ -37,4 +37,63 @@ def create_table(post_view, max_days, channel):
 
     df = pd.DataFrame(data, columns=columns)
 
-    return df
+
+    def contains_substring(string, substring):
+    """
+    Проверяет наличие подстроки в строке.
+    
+    :param string:
+ Исходная строка
+    :param substring: Подстрока, которую нужно найти
+    :return: Логическое значение (True/False), указывающее на наличие подстроки
+    """
+    # Если подстрока найдена в исходной строке, возвращаем True
+    if substring in string:
+        return True
+    # В противном случае возвращаем False
+    else:
+        return False
+
+    # Определение списков ключевых слов для разных уровней значимости
+    keywords_top = ['(100', '(9', '(8']
+    keywords_median = ['(7', '(6', '(5', '(4', '(3']
+    keywords_bottom = ['(2', '(1']
+    
+    def style_contains(cell_value):
+        """
+        Применяем цветовую маркировку к ячейкам таблицы на основе наличия определенных ключевых слов.
+        
+        :param cell_value: Значение ячейки
+        :return: Цветовая разметка для ячейки
+        """
+        # Проверяем, является ли значение строки и содержит ли оно ключевое слово из списка top
+        if isinstance(cell_value, str) and any(keyword in cell_value for keyword in keywords_top) \
+                and len(cell_value.split(' (')[1].split('.')[0]) > 1:
+            return 'color: green'
+        
+        # Аналогично проверяем для медианных значений
+        elif isinstance(cell_value, str) and any(keyword in cell_value for keyword in keywords_median) \
+                and len(cell_value.split(' (')[1].split('.')[0]) > 1:
+            return 'color: orange'
+        
+        # И наконец, для bottom значений
+        elif isinstance(cell_value, str) and any(keyword in cell_value for keyword in keywords_bottom) \
+                and len(cell_value.split(' (')[1].split('.')[0]) > 1:
+            return 'color: red'
+        
+        # Специальный случай для одиночных символов после скобки
+        elif isinstance(cell_value, str) and contains_substring(cell_value, ' (') \
+                 and len(cell_value.split(' (')[1].split('.')[0]) == 1:
+            return 'color: red'
+        
+        # Для всех остальных случаев оставляем стиль по умолчанию
+        else:
+            return ''
+    
+    # Применение функции стилей ко всем ячейкам DataFrame
+    styled_df = table.style.map(style_contains)
+    
+    # Отображаем отформатированный DataFrame
+    
+
+    return styled_df
