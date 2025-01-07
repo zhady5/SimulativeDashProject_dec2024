@@ -39,12 +39,12 @@ def create_table(post_view, max_days, channel):
 
 
     def contains_substring(string, substring):
-    # Если подстрока найдена в исходной строке, возвращаем True
-    if substring in string:
-        return True
-    # В противном случае возвращаем False
-    else:
-        return False
+        # Если подстрока найдена в исходной строке, возвращаем True
+        if substring in string:
+            return True
+        # В противном случае возвращаем False
+        else:
+            return False
 
     # Определение списков ключевых слов для разных уровней значимости
     keywords_top = ['(100', '(9', '(8']
