@@ -40,49 +40,49 @@ def create_table(post_view, max_days, channel):
     return df
 
 
-    def styled_df(df):
-        def contains_substring(string, substring):
-            # Если подстрока найдена в исходной строке, возвращаем True
-            if substring in string:
-                return True
-            # В противном случае возвращаем False
-            else:
-                return False
+def styled_df(df):
+    def contains_substring(string, substring):
+        # Если подстрока найдена в исходной строке, возвращаем True
+        if substring in string:
+            return True
+        # В противном случае возвращаем False
+        else:
+            return False
+
+    # Определение списков ключевых слов для разных уровней значимости
+    keywords_top = ['(100', '(9', '(8']
+    keywords_median = ['(7', '(6', '(5', '(4', '(3']
+    keywords_bottom = ['(2', '(1']
     
-        # Определение списков ключевых слов для разных уровней значимости
-        keywords_top = ['(100', '(9', '(8']
-        keywords_median = ['(7', '(6', '(5', '(4', '(3']
-        keywords_bottom = ['(2', '(1']
+    def style_contains(cell_value):
+        # Проверяем, является ли значение строки и содержит ли оно ключевое слово из списка top
+        if isinstance(cell_value, str) and any(keyword in cell_value for keyword in keywords_top) \
+                and len(cell_value.split(' (')[1].split('.')[0]) > 1:
+            return 'color: green'
         
-        def style_contains(cell_value):
-            # Проверяем, является ли значение строки и содержит ли оно ключевое слово из списка top
-            if isinstance(cell_value, str) and any(keyword in cell_value for keyword in keywords_top) \
-                    and len(cell_value.split(' (')[1].split('.')[0]) > 1:
-                return 'color: green'
-            
-            # Аналогично проверяем для медианных значений
-            elif isinstance(cell_value, str) and any(keyword in cell_value for keyword in keywords_median) \
-                    and len(cell_value.split(' (')[1].split('.')[0]) > 1:
-                return 'color: orange'
-            
-            # И наконец, для bottom значений
-            elif isinstance(cell_value, str) and any(keyword in cell_value for keyword in keywords_bottom) \
-                    and len(cell_value.split(' (')[1].split('.')[0]) > 1:
-                return 'color: red'
-            
-            # Специальный случай для одиночных символов после скобки
-            elif isinstance(cell_value, str) and contains_substring(cell_value, ' (') \
-                     and len(cell_value.split(' (')[1].split('.')[0]) == 1:
-                return 'color: red'
-            
-            # Для всех остальных случаев оставляем стиль по умолчанию
-            else:
-                return ''
+        # Аналогично проверяем для медианных значений
+        elif isinstance(cell_value, str) and any(keyword in cell_value for keyword in keywords_median) \
+                and len(cell_value.split(' (')[1].split('.')[0]) > 1:
+            return 'color: orange'
         
-        # Применение функции стилей ко всем ячейкам DataFrame
-        styled_df = df.style.map(style_contains)
+        # И наконец, для bottom значений
+        elif isinstance(cell_value, str) and any(keyword in cell_value for keyword in keywords_bottom) \
+                and len(cell_value.split(' (')[1].split('.')[0]) > 1:
+            return 'color: red'
         
-        # Отображаем отформатированный DataFrame
+        # Специальный случай для одиночных символов после скобки
+        elif isinstance(cell_value, str) and contains_substring(cell_value, ' (') \
+                 and len(cell_value.split(' (')[1].split('.')[0]) == 1:
+            return 'color: red'
         
+        # Для всех остальных случаев оставляем стиль по умолчанию
+        else:
+            return ''
     
-        return styled_df
+    # Применение функции стилей ко всем ячейкам DataFrame
+    styled_df = df.style.map(style_contains)
+    
+    # Отображаем отформатированный DataFrame
+    
+
+    return styled_df
