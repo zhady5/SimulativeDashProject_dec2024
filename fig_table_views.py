@@ -39,14 +39,6 @@ def create_table(post_view, max_days, channel):
 
 
     def contains_substring(string, substring):
-    """
-    Проверяет наличие подстроки в строке.
-    
-    :param string:
- Исходная строка
-    :param substring: Подстрока, которую нужно найти
-    :return: Логическое значение (True/False), указывающее на наличие подстроки
-    """
     # Если подстрока найдена в исходной строке, возвращаем True
     if substring in string:
         return True
