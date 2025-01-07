@@ -63,7 +63,7 @@ def styled_df(df):
         # Аналогично проверяем для медианных значений
         elif isinstance(cell_value, str) and any(keyword in cell_value for keyword in keywords_median) \
                 and len(cell_value.split(' (')[1].split('.')[0]) > 1:
-            return 'color: orange'
+            return 'color: #8B0000'
         
         # И наконец, для bottom значений
         elif isinstance(cell_value, str) and any(keyword in cell_value for keyword in keywords_bottom) \
