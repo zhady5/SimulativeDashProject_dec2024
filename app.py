@@ -269,7 +269,9 @@ def main():
         #st.table(df[columns_to_show])
         df_subset = df[columns_to_show]
         html_table = styled_df(df_subset).to_html()
-        st.write(html_table, unsafe_allow_html=True)
+        # Оборачиваем таблицу в div с фиксированной шириной и прокруткой
+        scrollable_table = f'<div style="overflow-x:auto;">{html_table}</div>'
+        st.write(hcrollable_table, unsafe_allow_html=True)
         #---------------------------------------------------------------------------------------------------------------------
         #Поисковик
         st.markdown('<div class="subheader"><h2>Просмотр текста поста и даты по номеру ID:</h2></div>', unsafe_allow_html=True)
