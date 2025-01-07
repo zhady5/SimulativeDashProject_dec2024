@@ -85,7 +85,7 @@ def styled_df(df):
       # Установка стиля для заголовков
     styled_df.set_table_styles([
         {'selector': 'th', 'props': [('color', '#8B0000')]},
-         {'selector': 'tr', 'props': [('border-bottom', '1px solid gray')]},
+         {'selector': 'tr', 'props': [('border-bottom', '0.5px solid gray')]},
     ])
     
 
