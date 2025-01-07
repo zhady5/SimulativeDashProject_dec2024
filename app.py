@@ -266,7 +266,7 @@ def main():
         #styled_df = df.style.apply(highlight_percentages, subset= [str(i)+" д" for i in range(1, days_to_show+1)])
         #st.dataframe(styled_df.to_html(), unsafe_allow_html=True)
 
-        st.table(df[columns_to_show])
+        st.dataframe(df[columns_to_show])
 
         #---------------------------------------------------------------------------------------------------------------------
         #Поисковик
