@@ -268,7 +268,7 @@ def main():
 
         #st.table(df[columns_to_show])
         df_subset = df[columns_to_show]
-        html_table = styled_df(df_subset).render()
+        html_table = styled_df(df_subset).to_html()
         st.write(html_table, unsafe_allow_html=True)
         #---------------------------------------------------------------------------------------------------------------------
         #Поисковик
