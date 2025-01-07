@@ -11,7 +11,7 @@ from fig_subs_inds import create_fig_subs_inds
 from fig_heatmap import create_heatmap
 from fig_subs_pos_neg import create_subs_pos_neg, create_slider
 from fig_bubble import create_bubble_fig
-from fig_table_views import create_table
+from fig_table_views import create_table, styled_df
 from fig_image import make_image, prepare_data
 
 
@@ -266,8 +266,9 @@ def main():
         #styled_df = df.style.apply(highlight_percentages, subset= [str(i)+" д" for i in range(1, days_to_show+1)])
         #st.dataframe(styled_df.to_html(), unsafe_allow_html=True)
 
-        st.dataframe(df[columns_to_show])
-
+        #st.table(df[columns_to_show])
+        df_subset = df[columns_to_show]
+        display(styled_df(df_subset))
         #---------------------------------------------------------------------------------------------------------------------
         #Поисковик
         st.markdown('<div class="subheader"><h2>Просмотр текста поста и даты по номеру ID:</h2></div>', unsafe_allow_html=True)
