@@ -268,7 +268,8 @@ def main():
 
         #st.table(df[columns_to_show])
         df_subset = df[columns_to_show]
-        display(styled_df(df_subset))
+        html_table = styled_df(df_subset).render()
+        st.write(html_table, unsafe_allow_html=True)
         #---------------------------------------------------------------------------------------------------------------------
         #Поисковик
         st.markdown('<div class="subheader"><h2>Просмотр текста поста и даты по номеру ID:</h2></div>', unsafe_allow_html=True)
