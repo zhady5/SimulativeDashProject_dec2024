@@ -82,7 +82,10 @@ def styled_df(df):
     # Применение функции стилей ко всем ячейкам DataFrame
     styled_df = df.style.map(style_contains)
     
-    # Отображаем отформатированный DataFrame
+      # Установка стиля для заголовков
+    styled_df.set_table_styles([
+        {'selector': 'th', 'props': [('color', '#8B0000')]},
+    ])
     
 
     return styled_df
