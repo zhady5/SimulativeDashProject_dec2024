@@ -60,12 +60,6 @@ def create_table(post_view, max_days, channel):
     keywords_bottom = ['(2', '(1']
     
     def style_contains(cell_value):
-        """
-        Применяем цветовую маркировку к ячейкам таблицы на основе наличия определенных ключевых слов.
-        
-        :param cell_value: Значение ячейки
-        :return: Цветовая разметка для ячейки
-        """
         # Проверяем, является ли значение строки и содержит ли оно ключевое слово из списка top
         if isinstance(cell_value, str) and any(keyword in cell_value for keyword in keywords_top) \
                 and len(cell_value.split(' (')[1].split('.')[0]) > 1:
