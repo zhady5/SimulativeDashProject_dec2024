@@ -202,7 +202,7 @@ def job():
         conn.close()
         print('conn_close')
         # Загрузка данных в репозиторий GitHub
-        github_token = os.environ.get("GITHUB_TOKEN")
+        github_token = os.environ.get("DASH_TOKEN")
         repo_owner = "zhady5"
         repo_name = "SimulativeDashProject_dec2024"
         branch = "master"
