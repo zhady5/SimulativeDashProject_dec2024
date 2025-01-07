@@ -269,39 +269,9 @@ def main():
         #st.table(df[columns_to_show])
         df_subset = df[columns_to_show]
         html_table = styled_df(df_subset).to_html()
-
-
-        # CSS-стиль для фиксации первого столбца и заголовков
-        css_style = """ <style> .fixed-first-column table { position: relative; width: 100%; border-collapse: collapse; border-spacing: 0; border: 1px solid black; } .fixed-first-column thead th { background-color: #eaeaea; color: black; position: sticky; top: 0; z-index: 10; } .fixed-first-column tbody th { position: sticky; left: 0; background-color: white; border-right: 2px solid black; } </style> """
-
-        # HTML-шаблон для таблицы с фиксированным первым столбцом и заголовком
-        html_template = html_template = f"""
-                                            <div class="table-wrapper">
-                                              <style>
-                                                .table-fixed {{
-                                                    position: relative;
-                                                }}
-                                                .table-fixed thead th:first-child,
-                                                .table-fixed tbody td:first-child {{
-                                                    position: sticky;
-                                                    left: 0;
-                                                    background-color: white; /* Цвет фона фиксированных ячеек */
-                                                    z-index: 10;
-                                                }}
-                                                .scroll-container {{
-                                                    overflow-x: auto;
-                                                }}
-                                              </style>
-                                              <div class="scroll-container">
-                                                {html_table}
-                                              </div>
-                                            </div>
-                                            """
-        # Отображаем таблицу с фиксированными элементами
-        st.write(css_style + html_template, unsafe_allow_html=True)
         # Оборачиваем таблицу в div с фиксированной шириной и прокруткой
-        #scrollable_table = f'<div style="overflow-x:auto;">{html_table}</div>'
-        #st.write(scrollable_table, unsafe_allow_html=True)
+        scrollable_table = f'<div style="overflow-x:auto;">{html_table}</div>'
+        st.write(scrollable_table, unsafe_allow_html=True)
         #---------------------------------------------------------------------------------------------------------------------
         #Поисковик
         st.markdown('<div class="subheader"><h2>Просмотр текста поста и даты по номеру ID:</h2></div>', unsafe_allow_html=True)
