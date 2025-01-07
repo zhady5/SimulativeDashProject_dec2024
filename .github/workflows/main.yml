@@ -25,5 +25,5 @@ jobs:
         DB_PASSWORD: "hA7Oqhh76Aj2D3" #${{ secrets.DB_PASSWORD }}
         DB_HOST: "89.104.71.27" #${{ secrets.DB_HOST }}
         DB_PORT: 5432 #${{ secrets.DB_PORT }}
-        GITHUB_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN:  ${{ secrets.DASH_TOKEN }}
       run: python schedule_load_data.py
