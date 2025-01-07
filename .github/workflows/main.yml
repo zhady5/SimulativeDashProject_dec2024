@@ -22,8 +22,8 @@ jobs:
       env:
         DB_NAME:  "Telegram_stat" #${{ secrets.DB_NAME }}
         DB_USER: "postgres" #${{ secrets.DB_USER }}
-        DB_PASSWORD:  ${{ secrets.DB_PASSWORD }}
+        DB_PASSWORD:  "hA7Oqhh76Aj2D3" #${{ secrets.DB_PASSWORD }}
         DB_HOST: "89.104.71.27" #${{ secrets.DB_HOST }}
         DB_PORT: 5432 #${{ secrets.DB_PORT }}
-        GITHUB_TOKEN:  ${{ secrets.DASH_TOKEN }}
+        DASH_TOKEN:  ${{ secrets.DASH_TOKEN }}
       run: python schedule_load_data.py
