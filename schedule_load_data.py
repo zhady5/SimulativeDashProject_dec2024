@@ -40,14 +40,6 @@ def connect_to_db():
         port=port
     )
 
-
-required_env_vars = ['DB_NAME', 'DB_USER', 'DB_PASSWORD', 'DB_HOST', 'DB_PORT']
-
-for var in required_env_vars:
-    if var not in os.environ:
-        raise ValueError(f"Environment variable '{var}' is missing.")
-
-
 def fetch_dataframe(cursor, query, params=None):
     if params:
         cursor.execute(query, params)
