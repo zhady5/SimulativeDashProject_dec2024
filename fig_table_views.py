@@ -77,7 +77,7 @@ def create_table(post_view, max_days, channel):
             return ''
     
     # Применение функции стилей ко всем ячейкам DataFrame
-    styled_df = table.style.map(style_contains)
+    styled_df = df.style.map(style_contains)
     
     # Отображаем отформатированный DataFrame
     
