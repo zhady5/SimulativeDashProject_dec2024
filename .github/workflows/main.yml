@@ -20,7 +20,7 @@ jobs:
         pip install pandas psycopg2-binary python-dotenv requests
     - name: Run script
       env:
-        DB_NAME: "Telegram_stat" #${{ secrets.DB_NAME }}
+        DB_NAME:  ${{ secrets.DB_NAME }}
         DB_USER: "postgres" #${{ secrets.DB_USER }}
         DB_PASSWORD: "hA7Oqhh76Aj2D3" #${{ secrets.DB_PASSWORD }}
         DB_HOST: "89.104.71.27" #${{ secrets.DB_HOST }}
