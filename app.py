@@ -15,7 +15,7 @@ from fig_table_views import create_table, styled_df
 from fig_image import make_image, prepare_data
 
 
-channels, gr_pvr, post_view, posts, subs, table_day_views = load_data()
+
 #processed_data = process_data(channels, posts, reactions, subscribers, views)
 
 st.set_page_config(layout="wide", page_icon="🅢",)
@@ -98,7 +98,8 @@ def main():
     #subs = processed_data['subs']
     #gr_pvr = processed_data['gr_pvr']
     #post_view = processed_data['post_view']
-
+    channels, gr_pvr, post_view, posts, subs, table_day_views = load_data()
+    
     #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # БЛОК 1
     #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
