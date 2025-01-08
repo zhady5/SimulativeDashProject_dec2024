@@ -17,6 +17,7 @@ import json
 import logging
 
 from data_processing import process_data
+from fig_create_teble import table_views
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -205,6 +206,7 @@ def job():
         subscribers_csv = dataframe_to_csv(subs)
         post_view_csv = dataframe_to_csv(post_view)
         gr_pvr_csv = dataframe_to_csv(gr_pvr)
+        table_day_views_csv = dataframe_to_csv(table_views(post_view)) 
         
         
 
@@ -222,7 +224,8 @@ def job():
             "posts": "data_processing/posts.csv",
             "subscribers": "data_processing/subscribers.csv",
             "post_view": "data_processing/post_view.csv",
-            "gr_pvr": "data_processing/gr_pvr.csv"
+            "gr_pvr": "data_processing/gr_pvr.csv",
+            "table_day_views": "data_processing/table_day_views.csv",
         }
 
         for table, file_path in file_paths.items():
