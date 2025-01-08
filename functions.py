@@ -62,57 +62,6 @@ def get_gradient_color(value, min_val=0, max_val=100):
     color = '#%02x%02x%02x' % (r, g, b)
     return color
 
-def create_table(post_view, max_days, channel):
-    
-    filtered_post_view = post_view[(post_view['days_diff'] <= max_days)&(post_view.channel_name==channel)].copy()
-    filtered_post_view = filtered_post_view.groupby(['post_datetime', 'post_id'
-                                                     , 'current_views', 'days_diff'])[['view_change', 'percent_new_views']].sum().reset_index()
-    grouped_df = filtered_post_view.groupby(['post_datetime', 'post_id']).agg({
-        'view_change': lambda x: list(x),
-        'percent_new_views': lambda x: list(x),
-        'current_views': lambda x: x.iloc[-1]
-    }).reset_index()
-
-    max_days = int(round(max_days))
-    
-    columns = ["ID поста", "Дата публикации", "Текущие просмотры"] + [f"{i} д" for i in range(1, max_days+1)]
-    data = []
-    
-    for _, row in reversed(list(grouped_df.iterrows())):
-        view_change = row['view_change']
-        percent_new_views = row['percent_new_views']
-        current_views = row['current_views']
-        
-        row_data = [
-            html.Td(f"{row['post_id']}"),
-            html.Td(f"{datetime.datetime.strptime(row['post_datetime'], '%Y-%m-%d %H:%M:%S.%f').strftime('%b %d, %Y')}", style={"text-align": "center"}),
-            html.Td(current_views)
-        ]
-        for day in range(1, max_days+1):
-            if day <= len(view_change):
-                cell_value = f"{view_change[day-1]} ({percent_new_views[day-1]:.2f}%)"
-                
-                # Проверяем процентное значение
-                if percent_new_views[day-1] >= 80:
-                    text_color = "#228B22"  # Зеленый цвет
-                else:
-                    # Используем функцию для получения градиентного цвета
-                    text_color = get_gradient_color(percent_new_views[day-1])
-                    
-                row_data.append(html.Td(cell_value, style={"color": text_color
-                                                           , "font-weight": "bold"
-                                                           , 'text-align': 'center'}))  # Изменение стиля текста
-            else:
-                row_data.append(html.Td("-", style={"text-align": "center"}))
-     
-        data.append(html.Tr(row_data))
-        
-    return html.Table([
-        html.Thead(html.Tr([html.Th(col) for col in columns])),
-        html.Tbody(data)
-    ], className="tgstat-table")
-
-
 
 def hex_to_rgb(hex_code):
     """Преобразует HEX-код в RGB."""
