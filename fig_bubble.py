@@ -41,7 +41,7 @@ def create_bubble_fig(filtered_df):
             hovertemplate=
                 '<b>ID Поста:</b> %{text}<br>' +
                 '<b>Текущие Просмотры:</b> %{x}<br>' +
-                '<b>Количество реакций:</b> %{marker.size}<br>' +  # Добавлен размер пузыря
+                '<b>Количество знаков в тексте:</b> %{marker.size}<br>' +  # Добавлен размер пузыря
                 '<b>Активность:</b> %{y} %<extra></extra>'
         ))
         
