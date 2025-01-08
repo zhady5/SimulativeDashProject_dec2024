@@ -42,6 +42,7 @@ def process_posts(posts, channels):
     posts['time'] = posts.datetime.apply(lambda t: str(t)[10:])
     posts['cnt'] = posts.groupby(['channel_id', 'date'])['message_id'].transform('count')
     posts['hour'] = pd.to_datetime(posts.datetime).dt.hour
+    posts['text_len'] = posts.text.str.len()
     return posts[~posts.text.isnull() & (posts.text != 'Нет текста')].copy()
 
 def process_views(views):
@@ -71,9 +72,9 @@ def process_reactions(reactions):
 
 def combine_post_view_data(posts, views):
     post_view = views[['post_id', 'view_cnt', 'view_change', 'datetime']].merge(
-        posts[['id', 'channel_name', 'date', 'datetime']].rename(columns={'id': 'post_id', 'datetime': 'post_datetime'}),
+        posts[['id', 'channel_name', 'date', 'datetime', 'text_len']].rename(columns={'id': 'post_id', 'datetime': 'post_datetime'}),
         on='post_id'
-    )[['channel_name', 'post_id', 'post_datetime', 'datetime', 'view_cnt', 'view_change']]
+    )[['channel_name', 'post_id', 'post_datetime', 'datetime', 'view_cnt', 'view_change', 'text_len']]
     post_view = post_view.sort_values(by=['channel_name', 'post_id', 'datetime']).reset_index(drop=True)
     post_view['hours_diff'] = (pd.to_datetime(post_view.datetime) - pd.to_datetime(post_view.post_datetime)).dt.total_seconds() / 3600
     post_view['days_diff'] = post_view['hours_diff'] / 24
@@ -86,7 +87,7 @@ def combine_post_view_data(posts, views):
 
 def combine_post_view_reaction_data(post_view, reacts):
     group_reacts = reacts.groupby(['post_id', 'reaction_type'])[['datetime', 'react_cnt']].last().reset_index()
-    group_post_view = post_view.groupby(['channel_name', 'post_datetime', 'post_id', 'current_views'])[['datetime']].last().reset_index()
+    group_post_view = post_view.groupby(['channel_name', 'post_datetime', 'post_id', 'current_views', 'text_len'])[['datetime']].last().reset_index()
     group_reacts['datetime_format'] = pd.to_datetime(group_reacts.datetime).dt.strftime('%Y-%m-%d %H:%M:%S')
     group_post_view['datetime_format'] = pd.to_datetime(group_post_view.datetime).dt.strftime('%Y-%m-%d %H:%M:%S')
     group_reacts.drop('datetime', axis=1, inplace=True)
