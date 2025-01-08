@@ -28,10 +28,10 @@ def convert_date(date, format_date = '%Y-%m-%d %H:%M:%S.%f'):
 
 
 def get_current_previous_sums(df, col, period):
-    mask1 = (pd.to_datetime(df.date) <= convert_date(date_ago(period[0]), '%Y-%m-%d').date())
-    mask2 = (pd.to_datetime(df.date) > convert_date(date_ago(period[1], period[2]), '%Y-%m-%d').date())
-    mask3 = (pd.to_datetime(df.date) <= convert_date(date_ago(period[1], period[2]), '%Y-%m-%d').date())
-    mask4 = (pd.to_datetime(df.date) > convert_date(date_ago(period[1], period[2]*2), '%Y-%m-%d').date())
+    mask1 = (convert_date(df.date, '%Y-%m-%d') <= convert_date(date_ago(period[0]), '%Y-%m-%d').date())
+    mask2 = (convert_date(df.date, '%Y-%m-%d') > convert_date(date_ago(period[1], period[2]), '%Y-%m-%d').date())
+    mask3 = (convert_date(df.date, '%Y-%m-%d') <= convert_date(date_ago(period[1], period[2]), '%Y-%m-%d').date())
+    mask4 = (convert_date(df.date, '%Y-%m-%d') > convert_date(date_ago(period[1], period[2]*2), '%Y-%m-%d').date())
     
     current = df[mask1&mask2][col].sum()
     previous = df[mask3&mask4][col].sum()    
