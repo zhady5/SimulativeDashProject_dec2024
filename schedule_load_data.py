@@ -16,6 +16,8 @@ import requests
 import json
 import logging
 
+from data_processing import process_data
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -158,23 +160,23 @@ def job():
         print(six_month_ago)
         # CHANNELS
         channels = fetch_dataframe(cursor, "SELECT * FROM channels")
-        channels_csv = dataframe_to_csv(channels)
+        #channels_csv = dataframe_to_csv(channels)
         
         # POSTS
         posts_query = sql.SQL("SELECT * FROM posts WHERE date >= %s;")
         posts = fetch_dataframe(cursor, posts_query, (six_month_ago,))
-        posts_csv = dataframe_to_csv(posts)
+        #posts_csv = dataframe_to_csv(posts)
         
         # SUBSCRIBERS
         subscribers_query = sql.SQL("SELECT * FROM subscribers WHERE timestamp >= %s;")
         subscribers = fetch_dataframe(cursor, subscribers_query, (six_month_ago,))
-        subscribers_csv = dataframe_to_csv(subscribers)
+        #subscribers_csv = dataframe_to_csv(subscribers)
         
         # VIEWS
         post_ids = tuple(posts['id'].tolist())
         views_query = sql.SQL("SELECT * FROM views WHERE post_id IN %s;")
         views = fetch_dataframe(cursor, views_query, (post_ids,))
-        views_csv = dataframe_to_csv(views)
+        #views_csv = dataframe_to_csv(views)
         
         # REACTIONS
         reactions_query = """
@@ -188,7 +190,23 @@ def job():
             WHERE rn = 1;
         """
         reactions = fetch_dataframe(cursor, reactions_query)
-        reactions_csv = dataframe_to_csv(reactions)
+        #reactions_csv = dataframe_to_csv(reactions)
+
+
+        processed_data = process_data(channels, posts, reactions, subscribers, views)
+
+        posts = processed_data['posts']
+        subs = processed_data['subs']
+        post_view = processed_data['post_view']
+        gr_pvr = processed_data['gr_pvr']
+    
+        channels_csv = dataframe_to_csv(channels)
+        posts_csv = dataframe_to_csv(posts)
+        subscribers_csv = dataframe_to_csv(subs)
+        post_view_csv = dataframe_to_csv(post_view)
+        gr_pvr_csv = dataframe_to_csv(gr_pvr)
+        
+        
 
         cursor.close()
         conn.close()
@@ -200,11 +218,11 @@ def job():
         branch = "master"
 
         file_paths = {
-            "channels": "data/channels.csv",
-            "posts": "data/posts.csv",
-            "subscribers": "data/subscribers.csv",
-            "views": "data/views.csv",
-            "reactions": "data/reactions.csv"
+            "channels": "data_processing/channels.csv",
+            "posts": "data_processing/posts.csv",
+            "subscribers": "data_processing/subscribers.csv",
+            "post_view": "data_processing/post_view.csv",
+            "gr_pvr": "data_processing/gr_pvr.csv"
         }
 
         for table, file_path in file_paths.items():
