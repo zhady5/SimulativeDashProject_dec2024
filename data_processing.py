@@ -3,6 +3,7 @@ import os
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import math
+import streamlit as st
 
 @st.cache_data
 def process_data(channels, posts, reactions, subscribers, views):
