@@ -15,7 +15,7 @@ from fig_table_views import create_table, styled_df
 from fig_image import make_image, prepare_data
 
 
-channels, gr_pvr, post_view, posts, subscribers, table_day_views = load_data()
+channels, gr_pvr, post_view, posts, subs, table_day_views = load_data()
 #processed_data = process_data(channels, posts, reactions, subscribers, views)
 
 st.set_page_config(layout="wide", page_icon="🅢",)
