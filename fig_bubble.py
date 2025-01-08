@@ -33,7 +33,7 @@ def create_bubble_fig(filtered_df):
                 colorscale=colors,
                 showscale=False,  # Скрывает colorbar
                 sizemode='area',
-                sizeref=2. * max(0, max(gr_pvr_sum['react_cnt_sum'])) / (18.**2),
+                sizeref=2. * max(0, max(gr_pvr_sum['text_len'])) / (18.**2),
                 sizemin=4
             ),
             text=gr_pvr_sum[['post_id']],  # Показывает post_id и дату при наведении
