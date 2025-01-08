@@ -283,7 +283,7 @@ def main():
         days_to_show = st.session_state.slider_days
         columns_to_show = ["ID поста", "Дата публикации", "Текущие просмотры"] + [str(i)+" д" for i in range(1, days_to_show+1)]
         
-        df = create_table(post_view, days_to_show, selected_channel)
+        df = create_table(table_day_views, days_to_show, selected_channel) 
         df_subset = df[columns_to_show]
         html_table = styled_df(df_subset).to_html()
         # Оборачиваем таблицу в div с фиксированной шириной и прокруткой
