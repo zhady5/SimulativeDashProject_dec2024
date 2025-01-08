@@ -4,34 +4,6 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import math
 
-def load_data():
-    import os
-
-    # Получаем текущую рабочую директорию
-    current_dir = os.getcwd()
-    # Путь к папке 'data' относительно текущей директории
-    folder_path = os.path.join(current_dir, "data")
-    
-    # Проверяем существование папки 'data'
-    if not os.path.exists(folder_path):
-        print(f"Папка {folder_path} не существует.")
-    else:
-        # Получаем список всех файлов и каталогов внутри 'data'
-        files_and_dirs = os.listdir(folder_path)
-        file_list = sorted([f for f in files_and_dirs if os.path.isfile(os.path.join(folder_path, f))])
-        #file_list = sorted([f for f in os.listdir(files_and_dirs) if f.endswith('.csv')])
-        
-        
-    #folder_path = os.getcwd()
-    #file_list = sorted([f for f in os.listdir(folder_path) if f.endswith('.csv')])
-    
-    channels = pd.read_csv(os.path.join(folder_path, file_list[0]))
-    posts = pd.read_csv(os.path.join(folder_path, file_list[1]))
-    reactions = pd.read_csv(os.path.join(folder_path, file_list[2]))
-    subscribers = pd.read_csv(os.path.join(folder_path, file_list[3]))
-    views = pd.read_csv(os.path.join(folder_path, file_list[4]))
-    
-    return channels, posts, reactions, subscribers, views
 
 def process_data(channels, posts, reactions, subscribers, views):
     # Process posts
@@ -124,3 +96,34 @@ def combine_post_view_reaction_data(post_view, reacts):
     gr_pvr['idx_active'] = round(gr_pvr.react_cnt_sum / gr_pvr.current_views * 100, 2)
     return gr_pvr
 
+
+def load_data():
+    import os
+
+    # Получаем текущую рабочую директорию
+    current_dir = os.getcwd()
+    # Путь к папке 'data' относительно текущей директории
+    folder_path = os.path.join(current_dir, "data_processing")
+    
+    # Проверяем существование папки 'data'
+    if not os.path.exists(folder_path):
+        print(f"Папка {folder_path} не существует.")
+    else:
+        # Получаем список всех файлов и каталогов внутри 'data'
+        files_and_dirs = os.listdir(folder_path)
+        file_list = sorted([f for f in files_and_dirs if os.path.isfile(os.path.join(folder_path, f))])
+        #file_list = sorted([f for f in os.listdir(files_and_dirs) if f.endswith('.csv')])
+        
+        
+    #folder_path = os.getcwd()
+    #file_list = sorted([f for f in os.listdir(folder_path) if f.endswith('.csv')])
+    
+    channels = pd.read_csv(os.path.join(folder_path, file_list[0]))
+    gr_pvr = pd.read_csv(os.path.join(folder_path, file_list[1]))
+    post_view = pd.read_csv(os.path.join(folder_path, file_list[2]))
+    posts = pd.read_csv(os.path.join(folder_path, file_list[3]))
+    subscribers = pd.read_csv(os.path.join(folder_path, file_list[4]))
+    table_day_views = pd.read_csv(os.path.join(folder_path, file_list[5]))
+    
+    
+    return channels, gr_pvr, post_view, posts, subscribers, table_day_views
