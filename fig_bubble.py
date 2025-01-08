@@ -28,7 +28,7 @@ def create_bubble_fig(filtered_df):
             y=gr_pvr_sum['idx_active'],
             mode='markers',
             marker=dict(
-                size=gr_pvr_sum['react_cnt_sum'],
+                size=gr_pvr_sum['text_len'],
                 color=gr_pvr_sum['current_views'],
                 colorscale=colors,
                 showscale=False,  # Скрывает colorbar
