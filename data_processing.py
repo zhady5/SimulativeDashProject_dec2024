@@ -3,9 +3,8 @@ import os
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import math
-import streamlit as st
 
-@st.cache_data
+#@st.cache_data
 def process_data(channels, posts, reactions, subscribers, views):
     # Process posts
     posts = process_posts(posts, channels)
@@ -99,7 +98,7 @@ def combine_post_view_reaction_data(post_view, reacts):
     return gr_pvr
 
 
-@st.cache_data
+#@st.cache_data
 def load_data():
     import os
 
