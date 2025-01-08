@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 from plotly.subplots import make_subplots
 import streamlit as st
-from functions import get_current_previous_sums, date_ago
+#from functions import get_current_previous_sums, date_ago
 import datetime
 
 def create_heatmap(filtered_df):
