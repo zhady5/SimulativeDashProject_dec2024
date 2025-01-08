@@ -15,8 +15,8 @@ from fig_table_views import create_table, styled_df
 from fig_image import make_image, prepare_data
 
 
-channels, posts, reactions, subscribers, views = load_data()
-processed_data = process_data(channels, posts, reactions, subscribers, views)
+channels, gr_pvr, post_view, posts, subscribers, table_day_views = load_data()
+#processed_data = process_data(channels, posts, reactions, subscribers, views)
 
 st.set_page_config(layout="wide", page_icon="🅢",)
 # Стили заголовков и подзаголовков
@@ -94,10 +94,10 @@ st.markdown("""
 
 def main():
     
-    posts = processed_data['posts']
-    subs = processed_data['subs']
-    gr_pvr = processed_data['gr_pvr']
-    post_view = processed_data['post_view']
+    #posts = processed_data['posts']
+    #subs = processed_data['subs']
+    #gr_pvr = processed_data['gr_pvr']
+    #post_view = processed_data['post_view']
 
     #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # БЛОК 1
