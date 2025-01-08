@@ -26,6 +26,6 @@ def table_views(post_view):
           percent_value = df_percent.at[index, column]
           merged_numeric.at[index, column] = f"{value} ({percent_value}%)"
 
-  tab_final = pd.concat([tab_abs[tab_abs.columns[:4]], merged_numeric], axis=1)
+  tab_final = pd.concat([tab_abs[tab_abs.columns[:4]], merged_numeric], axis=1).sort_values(by = 'post_datetime', ascending=False)
 
   return tab_final
