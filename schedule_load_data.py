@@ -17,7 +17,7 @@ import json
 import logging
 
 from data_processing import process_data
-from fig_create_teble import table_views
+from fig_create_table import table_views
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
