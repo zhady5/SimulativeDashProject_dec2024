@@ -145,13 +145,16 @@ def calculate_mean_views(post_view, channel):
 
 def calculate_mean_reacts(gr_pvr, channel, react1='', perc1=0, react2='', perc2=0, react3='', perc3=0):
     filtered_df = gr_pvr[gr_pvr.channel_name == channel]
+
+    filtered_df.loc[:,'reaction_type'] = filtered_df.reaction_type.apply(lambda r: 'Custom' if 'ReactionCustomEmoji' in r else r)
+    filtered_df.loc[:,'reaction_type'] = filtered_df.reaction_type.apply(lambda r: 'Paid 🌟' if 'ReactionPaid' in r else r)
     
     mean_reacts = int(round(filtered_df[['post_id', 'react_cnt_sum']].drop_duplicates().react_cnt_sum.mean(), 0))
     mean_idx = round(filtered_df[['post_id', 'idx_active']].drop_duplicates().idx_active.mean(), 1)
     
-    allReact = filtered_df[filtered_df.reaction_type.apply(len)==1].react_cnt.sum()
-    top3react = filtered_df[filtered_df.reaction_type.apply(len)==1].groupby('reaction_type').react_cnt.sum().reset_index()\
-                                                                    .sort_values('react_cnt', ascending=False).head(3).reset_index()
+    allReact = filtered_df.react_cnt.sum()
+    top3react = filtered_df.groupby('reaction_type').react_cnt.sum().reset_index()\
+                            .sort_values('react_cnt', ascending=False).head(3).reset_index()
     top3react.loc[:, 'react_cnt_perc'] = round(top3react.react_cnt/allReact*100, 0)
     cnt_react = top3react.shape[0]
     
