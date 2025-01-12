@@ -233,7 +233,7 @@ def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
         
     # Adding the bold header as a text annotation
     header_text = "\n Лидеры и аутсайдеры среди постов"
-    header_props = {'fontsize': 18, 'fontweight': 'bold', 'va': 'center', 'ha': 'center'}
+    header_props = {'fontsize': 18, 'fontweight': 'bold', 'va': 'center', 'ha': 'center', 'color': '#666'}
     # Adjusting the y-coordinate to bring the header closer to the table
     plt.text(0.5, 0.91, header_text, transform=fig.transFigure, **header_props)
     
