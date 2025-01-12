@@ -310,7 +310,7 @@ def main():
 
     
 
-    st.pyplot(create_table_top5(posts, subs, gr_pvr,  selected_channel, color_phone='#FFA500'))
+    st.pyplot(create_table_top5(posts, subs, gr_pvr,  selected_channel, color_phone='#ffb347'))
 
          
 
