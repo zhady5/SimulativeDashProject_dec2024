@@ -225,7 +225,7 @@ def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
         row_dividers=True,
         footer_divider=True,
         ax=ax,
-        textprops={"fontsize": 14},
+        textprops={"fontsize": 14, 'color': '#666'},
         row_divider_kw={"linewidth": 1, "linestyle": (0, (1, 5))},
         col_label_divider_kw={"linewidth": 1, "linestyle": "-"},
         column_border_kw={"linewidth": 1, "linestyle": "-"},
@@ -239,12 +239,12 @@ def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
     
     # Adding the subtitle at the top in gray
     subtitle_text = "\n Все посты сравниваются в рамках одного канала. \n Отображаются топ-5 постов с наивысшими показателями и топ-5 с наихудшими показателями на текущий момент. "
-    subtitle_props = {'fontsize': 14, 'va': 'center', 'ha': 'center', 'color': 'gray'}
+    subtitle_props = {'fontsize': 14, 'va': 'center', 'ha': 'center', 'color': '#666'}
     plt.text(0.5, 0.89, subtitle_text, transform=fig.transFigure, **subtitle_props)
     
     # Adding the footer text
     footer_text = "Источник: Данные Telegram API"
-    footer_props = {'fontsize': 14, 'va': 'center', 'ha': 'center'}
+    footer_props = {'fontsize': 14, 'va': 'center', 'ha': 'center', 'color': '#666'}
     # Adjusting the y-coordinate to position the footer closer to the bottom of the figure
     plt.text(0.5, 0.09, footer_text, transform=fig.transFigure, **footer_props)
     
