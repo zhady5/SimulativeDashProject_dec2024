@@ -13,6 +13,7 @@ from fig_subs_pos_neg import create_subs_pos_neg, create_slider
 from fig_bubble import create_bubble_fig
 from fig_table_views import create_table, styled_df
 from fig_image import make_image, prepare_data
+from fig_table_top5 import create_table_top5
 
 
 
@@ -306,6 +307,10 @@ def main():
                 #st.write(f"Дата поста: {row['date']}")
             except IndexError:
                 st.error("Номер ID не найден.")
+
+    
+
+    st.pyplot(create_table_top5(posts, subs, gr_pvr,  selected_channel, color_phone='#FFA500'))
 
          
 
