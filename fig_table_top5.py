@@ -22,45 +22,20 @@ from plottable.plots import circled_image # image
 
 def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
     
-    def df_cnt_sub_between_posts(df_posts, df_subs):
-        df_posts = df_posts.copy()
-        df_posts.loc[:, 'publication_date'] = pd.to_datetime(df_posts['datetime']).copy()
-        df_subs.loc[:, 'datetime'] = pd.to_datetime(df_subs['datetime']).copy()
+    def df_cnt_sub_between_posts(posts, subs, channel):
+        p = posts[['id', 'datetime', 'channel_name' 
+                      ]][(posts.datetime>='2024-11-30')&(posts.channel_name == 'Simulative')].sort_values(by='datetime').copy()
+        p.columns = ['post_id', 'datetime', 'channel_name']
+        p['datetime'] = p['datetime'].apply(lambda d: pd.Timestamp(d))
+
+        s = subs[['id', 'datetime', 'subs_cnt', 'channel_name','subs_change', 'subs_change_pos', 'subs_change_neg'
+                                                                 ]][subs.channel_name == 'Simulative'].sort_values(by='datetime').copy()
+        s['datetime'] = s['datetime'].apply(lambda d: pd.Timestamp(d))
     
-        # Добавляем колонки с датой следующего поста и временем между постами
-        df_posts.loc[:, 'next_post_date'] = df_posts['publication_date'].shift(-1).copy()
-        df_posts.loc[:, 'time_to_next_post'] = (df_posts['next_post_date'] - df_posts['publication_date']).dt.days.fillna(0).astype(int)
-    
-        # Объединяем данные по дате публикации и фиксируем изменение подписчиков
-        result = []
-        for index, row in df_posts.iterrows():
-            start_date = row['publication_date']
-            end_date = row['next_post_date']
-            
-            # Фильтруем строки из df_subs, попадающие в нужный диапазон
-            filtered_subs = df_subs[(df_subs['datetime'] > start_date) & (df_subs['datetime'] <= end_date)]
-            
-            if not filtered_subs.empty:
-                new_subscribers = filtered_subs['subs_change_pos'].sum()
-                unsubscribed = filtered_subs['subs_change_neg'].sum()
-            else:
-                new_subscribers = 0
-                unsubscribed = 0
-                
-            result.append({
-                'post_id': row['id'],
-                'publication_date': row['publication_date'],
-                'subs_change_pos': new_subscribers,
-                'subs_change_neg': unsubscribed
-            })
-        
-        # Создаем итоговый DataFrame
-        final_df = pd.DataFrame(result)
-    
-        return final_df.sort_values(by='publication_date', ascending=False)
+        return pd.merge_asof(s, p, on='datetime', by = 'channel_name')
     
     
-    post_subs_changes = df_cnt_sub_between_posts(posts[posts.channel_name == channel], subs[subs.channel_name == channel])
+    post_subs_changes = df_cnt_sub_between_posts(posts, subs, channel)
     
     df_cols = ['channel_name', 'post_id','post_datetime', 'current_views', 
              'react_cnt_sum', 'idx_active']
