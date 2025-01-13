@@ -31,8 +31,10 @@ def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
         s = subs[['id', 'datetime', 'subs_cnt', 'channel_name','subs_change', 'subs_change_pos', 'subs_change_neg'
                                                                  ]][subs.channel_name == 'Simulative'].sort_values(by='datetime').copy()
         s['datetime'] = s['datetime'].apply(lambda d: pd.Timestamp(d))
+
+        df = pd.merge_asof(s, p, on='datetime', by = 'channel_name')
     
-        return pd.merge_asof(s, p, on='datetime', by = 'channel_name')
+        return df.groupby(['channel_name', 'post_id'])[['subs_change', 'subs_change_pos', 'subs_change_neg']].sum().reset_index()
     
     
     post_subs_changes = df_cnt_sub_between_posts(posts, subs, channel)
