@@ -37,12 +37,13 @@ def process_data(channels, posts, reactions, subscribers, views):
 def process_posts(posts, channels):
     posts.rename(columns={'date': 'datetime'}, inplace=True)
     posts = posts.merge(channels[['id', 'channel_name']].rename(columns={'id':'channel_id'}), on='channel_id', how='left')
+    posts = posts[~posts.text.isnull() & (posts.text != 'Нет текста')].copy()
     posts['date'] = pd.to_datetime(posts.datetime).dt.date
     posts['time'] = posts.datetime.apply(lambda t: str(t)[10:])
     posts['cnt'] = posts.groupby(['channel_id', 'date'])['message_id'].transform('count')
     posts['hour'] = pd.to_datetime(posts.datetime).dt.hour
     posts['text_len'] = posts.text.str.len()
-    return posts[~posts.text.isnull() & (posts.text != 'Нет текста')].copy()
+    return posts
 
 def process_views(views):
     views = views.rename(columns={'timestamp': 'datetime', 'views': 'view_cnt'})
