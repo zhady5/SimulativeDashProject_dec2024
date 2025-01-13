@@ -24,12 +24,12 @@ def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
     
     def df_cnt_sub_between_posts(posts, subs, channel):
         p = posts[['id', 'datetime', 'channel_name' 
-                      ]][(posts.datetime>='2024-11-30')&(posts.channel_name == 'Simulative')].sort_values(by='datetime').copy()
+                      ]][posts.channel_name == channel].sort_values(by='datetime').copy()
         p.columns = ['post_id', 'datetime', 'channel_name']
         p['datetime'] = p['datetime'].apply(lambda d: pd.Timestamp(d))
 
         s = subs[['id', 'datetime', 'subs_cnt', 'channel_name','subs_change', 'subs_change_pos', 'subs_change_neg'
-                                                                 ]][subs.channel_name == 'Simulative'].sort_values(by='datetime').copy()
+                                                                 ]][subs.channel_name == channel].sort_values(by='datetime').copy()
         s['datetime'] = s['datetime'].apply(lambda d: pd.Timestamp(d))
 
         df = pd.merge_asof(s, p, on='datetime', by = 'channel_name')
