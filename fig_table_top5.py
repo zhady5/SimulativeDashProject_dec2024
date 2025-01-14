@@ -57,10 +57,10 @@ def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
     data_react_sum = get_top_bottom(df, 'react_cnt_sum', 5)
     data_idx_active = get_top_bottom(df, 'idx_active', 5)
     
-    data_post_subs_pos = get_top_bottom(post_subs_changes, 'subs_change_pos',5).iloc[:5]
-    #data_post_subs_pos = data_post_subs_pos[data_post_subs_pos.subs_change_pos>0]
-    data_post_subs_neg = get_top_bottom(post_subs_changes, 'subs_change_neg',5).iloc[5:]
-    #data_post_subs_neg= data_post_subs_neg[data_post_subs_neg.subs_change_neg<0]
+    data_post_subs_pos = post_subs_changes.nlargest(5, 'subs_change_pos')[['post_id', 'subs_change_pos']].dropna(how='all')
+    
+    data_post_subs_neg = post_subs_changes.nlargest(5, 'subs_change_neg')[['post_id', 'subs_change_neg']].dropna(how='all')
+    
     data_post_subs = pd.concat([data_post_subs_pos, data_post_subs_neg], axis=0)
     
     df = pd.concat([data_views,  data_react_sum ,  data_idx_active, data_post_subs], axis=1)
