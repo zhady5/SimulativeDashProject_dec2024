@@ -3,7 +3,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 from plotly.subplots import make_subplots
 import streamlit as st
-from functions import get_current_previous_sums
+from preparation_data.functions import get_current_previous_sums
 
 
 def create_fig_subs_inds(subs, selected_channel, bgcolor='#ffb347', word_color = '#666'):
