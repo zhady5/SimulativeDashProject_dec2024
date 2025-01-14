@@ -17,9 +17,7 @@ import json
 import logging
 
 from data_processing import process_data
-import sys
-sys.path.append('pgraph_functions')
-from fig_table_views import create_table
+from create_table_views import create_table
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
