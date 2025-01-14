@@ -20,7 +20,7 @@ from plottable.cmap import normed_cmap
 from plottable.plots import circled_image # image
 
 
-def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
+def create_table_top5(posts, subs, gr_pvr,  channel, bgcolor='#FFA500', word_color='#666'):
     
     def df_cnt_sub_between_posts(posts, subs, channel):
         p = posts[['id', 'datetime', 'channel_name' 
@@ -194,8 +194,8 @@ def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
     fig, ax = plt.subplots(figsize=(20, 22))
     
     # Set the figure and axes background to orange
-    fig.patch.set_facecolor(color_phone) ##f5dfbf #'#FFA500'
-    ax.set_facecolor(color_phone)
+    fig.patch.set_facecolor(bgcolor) ##f5dfbf #'#FFA500'
+    ax.set_facecolor(bgcolor)
     
     table = Table(
         df_final,
@@ -203,7 +203,7 @@ def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
         row_dividers=True,
         footer_divider=True,
         ax=ax,
-        textprops={"fontsize": 14, 'color': '#666'},
+        textprops={"fontsize": 14, 'color': word_color},
         row_divider_kw={"linewidth": 1, "linestyle": (0, (1, 5))},
         col_label_divider_kw={"linewidth": 1, "linestyle": "-"},
         column_border_kw={"linewidth": 1, "linestyle": "-"},
@@ -211,18 +211,18 @@ def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
         
     # Adding the bold header as a text annotation
     header_text = "\n Лидеры и аутсайдеры среди постов"
-    header_props = {'fontsize': 18, 'fontweight': 'bold', 'va': 'center', 'ha': 'center', 'color': '#666'}
+    header_props = {'fontsize': 18, 'fontweight': 'bold', 'va': 'center', 'ha': 'center', 'color': word_color}
     # Adjusting the y-coordinate to bring the header closer to the table
     plt.text(0.5, 0.91, header_text, transform=fig.transFigure, **header_props)
     
     # Adding the subtitle at the top in gray
     subtitle_text = "\n Таблица включает топ-5 постов с лучшими и худшими показателями по просмотрам, реакциям, индексу вовлеченности и динамике подписок. \n Анализ поможет понять, какой контент привлекает больше внимания, вызывает активность и влияет на рост аудитории. "
-    subtitle_props = {'fontsize': 14, 'va': 'center', 'ha': 'center', 'color': '#666'}
+    subtitle_props = {'fontsize': 14, 'va': 'center', 'ha': 'center', 'color': word_color}
     plt.text(0.5, 0.89, subtitle_text, transform=fig.transFigure, **subtitle_props)
     
     # Adding the footer text
     footer_text = "Источник: Данные Telegram API"
-    footer_props = {'fontsize': 14, 'va': 'center', 'ha': 'center', 'color': '#666'}
+    footer_props = {'fontsize': 14, 'va': 'center', 'ha': 'center', 'color': word_color}
     # Adjusting the y-coordinate to position the footer closer to the bottom of the figure
     plt.text(0.5, 0.09, footer_text, transform=fig.transFigure, **footer_props)
     
