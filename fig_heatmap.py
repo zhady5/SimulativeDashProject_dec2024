@@ -7,7 +7,7 @@ import streamlit as st
 #from functions import get_current_previous_sums, date_ago
 import datetime
 
-def create_heatmap(filtered_df):
+def create_heatmap(filtered_df, color_phone = '#ffb347',  word_color = "#212121"):
     
     # Генерация данных
     filtered_df = filtered_df[['date', 'hour', 'cnt']].rename(columns={'cnt': 'publications'}).sort_values('date')
@@ -32,7 +32,7 @@ def create_heatmap(filtered_df):
                 z=pd.DataFrame([[1] * len(x_labels)] * len(y_labels), columns=range(1, 25), index=y_labels),
                 x=x_labels,
                 y=y_labels,
-                colorscale=[[0, '#ffb347'], [1, '#ffb347']],
+                colorscale=[[0, color_phone], [1, color_phone]],
                 showscale=False,
                 hovertemplate='%{y} <br>%{x} ч <br>Публикаций: %{z}<extra></extra>'
             ),
@@ -50,14 +50,14 @@ def create_heatmap(filtered_df):
     ).update_layout(
         font_family='Arial',
         margin=dict(l=30, r=50, t=0, b=20),
-        paper_bgcolor='#ffb347',
-        plot_bgcolor='#ffb347',
-        legend_title_font_color="#212121",
-        legend_font_color="#212121",
+        paper_bgcolor=color_phone,
+        plot_bgcolor=color_phone,
+        legend_title_font_color=word_color,
+        legend_font_color=word_color,
         legend_borderwidth=0,
         hoverlabel_font_family='Arial',
         hoverlabel_font_size=12,
-        hoverlabel_font_color='#212121',
+        hoverlabel_font_color=word_color,
         hoverlabel_align='auto',
         hoverlabel_namelength=-1,
         hoverlabel_bgcolor='#FAFAFA',
