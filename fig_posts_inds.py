@@ -6,7 +6,7 @@ import streamlit as st
 from functions import get_current_previous_sums
 
 
-def create_fig_posts_inds(posts, selected_channel):
+def create_fig_posts_inds(posts, selected_channel, bgcolor='#ffb347'):
     
     # График по публикациям
     subdf_posts = posts[posts.channel_name == selected_channel][['channel_name', 'date', 'cnt']].drop_duplicates()
@@ -48,13 +48,13 @@ def create_fig_posts_inds(posts, selected_channel):
         font_family="Georgia",
         font_size=12,
         margin=dict(l=40, r=20, t=40, b=10),
-        paper_bgcolor= '#ffb347', #'rgba(0,0,0,0)',
-        plot_bgcolor= '#ffb347', #'rgba(0,0,0,0)',
+        paper_bgcolor= bgcolor, #'#ffb347', #'rgba(0,0,0,0)',
+        plot_bgcolor= bgcolor, #'rgba(0,0,0,0)',
         xaxis=dict(
             rangeselector=dict(  # Добавляем элементы управления диапазоном
                 bgcolor='#f5dfbf',  # Фоновый цвет области с кнопками
                 font=dict(color="#333"),  # Цвет текста на кнопках
-                activecolor='#ffb347',  # Цвет активной кнопки
+                activecolor=bgcolor,  # Цвет активной кнопки
                 bordercolor='#f5dfbf',  # Цвет рамки вокруг кнопок
                 buttons=list([
                     dict(count=2, label="2д", step="day", stepmode="backward"),
