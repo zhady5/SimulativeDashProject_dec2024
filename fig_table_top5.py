@@ -149,7 +149,7 @@ def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
                 group="Подписчики после публикации поста",
             ),
               ColumnDefinition(
-                name="Подписались",
+                name="Подписались\Отписались",
                 width=0.65,
                 textprops={
                     "ha": "center",
