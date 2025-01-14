@@ -6,7 +6,7 @@ import streamlit as st
 from functions import get_current_previous_sums
 
 
-def create_fig_posts_inds(posts, selected_channel, bgcolor='#ffb347'):
+def create_fig_posts_inds(posts, selected_channel, bgcolor='#ffb347', word_color = '#666'):
     
     # График по публикациям
     subdf_posts = posts[posts.channel_name == selected_channel][['channel_name', 'date', 'cnt']].drop_duplicates()
@@ -36,7 +36,7 @@ def create_fig_posts_inds(posts, selected_channel, bgcolor='#ffb347'):
         fig_posts.add_trace(
             go.Indicator(
                 value=current,
-                title={"text": f"<span style='font-size:0.8em;color:gray'>Публикаций за {period_names[period[0]]}</span>"},
+                title={"text": f"<span style='font-size:0.8em;color:{word_color}'>Публикаций за {period_names[period[0]]}</span>"},
                 mode="number+delta",
                 delta={'reference': previous, 'relative': True, "valueformat": ".2%"},
             ), row=i + 1, col=2
