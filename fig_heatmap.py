@@ -7,7 +7,7 @@ import streamlit as st
 #from functions import get_current_previous_sums, date_ago
 import datetime
 
-def create_heatmap(filtered_df, color_phone = '#ffb347',  word_color = "#212121"):
+def create_heatmap(filtered_df, bgcolor = '#ffb347',  word_color = "#212121"):
     
     # Генерация данных
     filtered_df = filtered_df[['date', 'hour', 'cnt']].rename(columns={'cnt': 'publications'}).sort_values('date')
@@ -32,7 +32,7 @@ def create_heatmap(filtered_df, color_phone = '#ffb347',  word_color = "#212121"
                 z=pd.DataFrame([[1] * len(x_labels)] * len(y_labels), columns=range(1, 25), index=y_labels),
                 x=x_labels,
                 y=y_labels,
-                colorscale=[[0, color_phone], [1, color_phone]],
+                colorscale=[[0, bgcolor], [1, bgcolor]],
                 showscale=False,
                 hovertemplate='%{y} <br>%{x} ч <br>Публикаций: %{z}<extra></extra>'
             ),
@@ -50,8 +50,8 @@ def create_heatmap(filtered_df, color_phone = '#ffb347',  word_color = "#212121"
     ).update_layout(
         font_family='Arial',
         margin=dict(l=30, r=50, t=0, b=20),
-        paper_bgcolor=color_phone,
-        plot_bgcolor=color_phone,
+        paper_bgcolor=bgcolor,
+        plot_bgcolor=bgcolor,
         legend_title_font_color=word_color,
         legend_font_color=word_color,
         legend_borderwidth=0,
