@@ -40,13 +40,13 @@ def prepare_data(posts, channel):
     df_words = pd.DataFrame(Counter(sum(words, [])).most_common(50), columns=['word', 'count'])
     return df_words
 
-def plot_wordcloud(data, color_phone ='#f5dfbf'):
+def plot_wordcloud(data, bgcolor ='#f5dfbf'):
     d = {a: x for a, x in data.values}
-    wc = WordCloud(background_color=phone_color, color_func=gradient_color_func)  # , width=480, height=360
+    wc = WordCloud(background_color=bgcolor, color_func=gradient_color_func)  # , width=480, height=360
     wc.fit_words(d)
     return wc.to_image()
 
-def make_image(df_words, color_phone ='#f5dfbf'):
+def make_image(df_words, bgcolor ='#f5dfbf'):
     img = BytesIO()
-    plot_wordcloud(data=df_words, , color_phone ).save(img, format='PNG')
+    plot_wordcloud(data=df_words, , bgcolor ).save(img, format='PNG')
     return 'data:image/png;base64,{}'.format(base64.b64encode(img.getvalue()).decode())
