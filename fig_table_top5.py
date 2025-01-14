@@ -68,8 +68,8 @@ def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
     df.columns = ['ID поста (1)' , 'Текущее количество'
                   ,'ID поста (2)' , 'Общее количество'
                    ,'ID поста (3)' , 'Индекс'
-                 ,'ID поста (4)' , 'Подписались'
-                 ,'ID поста (5)' , 'Отписались']
+                 ,'ID поста (4)' , 'Подписались\Отписались'
+                 ]
     
     df = df.set_index('ID поста (1)')
     
@@ -81,7 +81,7 @@ def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
     )   
     #["#ffffff", "#f2fbd2", "#c9ecb4", "#93d3ab", "#35b0ab"]
     
-    basic_services_cols = ['Текущее количество', 'Общее количество', 'Индекс', 'Подписались', 'Отписались']
+    basic_services_cols = ['Текущее количество', 'Общее количество', 'Индекс', 'Подписались\Отписались']
     
     
     #PiYG
@@ -156,26 +156,7 @@ def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
                     "bbox": {"boxstyle": "circle", "pad": 0.55},
                     "fontsize":11
                 },
-                cmap=normed_cmap(df["Подписались"], cmap=cmap_colors, num_stds=1),
-                group="Подписчики после публикации поста",
-            ),
-    
-    
-                    ColumnDefinition(
-                name="ID поста (5)",
-                textprops={"ha": "right", "weight": "bold", "fontsize":11},
-                width=0.6,
-                group="Подписчики после публикации поста",
-            ),
-              ColumnDefinition(
-                name="Отписались",
-                width=0.65,
-                textprops={
-                    "ha": "center",
-                    "bbox": {"boxstyle": "circle", "pad": 0.55},
-                    "fontsize":11
-                },
-                cmap=normed_cmap(df["Отписались"], cmap=cmap_colors, num_stds=1),
+                cmap=normed_cmap(df["Подписались\Отписались"], cmap=cmap_colors, num_stds=1),
                 group="Подписчики после публикации поста",
             ),
             
