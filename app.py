@@ -16,7 +16,7 @@ from fig_image import make_image, prepare_data
 from fig_table_top5 import create_table_top5
 
 
-
+bgcolor = '#ffb347'
 #processed_data = process_data(channels, posts, reactions, subscribers, views)
 
 st.set_page_config(layout="wide", page_icon="📊",)
@@ -310,7 +310,7 @@ def main():
 
     
 
-    st.pyplot(create_table_top5(posts, subs, gr_pvr,  selected_channel, color_phone='#ffb347'))
+    st.pyplot(create_table_top5(posts, subs, gr_pvr,  selected_channel, bgcolor))
 
          
 
