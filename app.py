@@ -11,7 +11,7 @@ from fig_subs_inds import create_fig_subs_inds
 from fig_heatmap import create_heatmap
 from fig_subs_pos_neg import create_subs_pos_neg, create_slider
 from fig_bubble import create_bubble_fig
-from fig_table_views import create_table, styled_df
+from fig_table_views import table_views, styled_df
 from fig_image import make_image, prepare_data
 from fig_table_top5 import create_table_top5
 
