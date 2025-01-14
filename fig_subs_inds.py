@@ -6,7 +6,7 @@ import streamlit as st
 from functions import get_current_previous_sums
 
 
-def create_fig_subs_inds(subs, selected_channel):
+def create_fig_subs_inds(subs, selected_channel, bgcolor='#ffb347', word_color = '#666'):
     
     # График по подписчикам
     subdf_subs = subs[subs.channel_name == selected_channel][['channel_name', 'date', 'subs_cnt', 'subs_change']].drop_duplicates()
@@ -39,7 +39,7 @@ def create_fig_subs_inds(subs, selected_channel):
         fig_subs.add_trace(
             go.Indicator(
                 value=current,
-                title={"text": f"<span style='font-size:0.8em;color:gray'>Подписчиков за {period_names[period[0]]}</span>"},
+                title={"text": f"<span style='font-size:0.8em;color:{word_color}'>Подписчиков за {period_names[period[0]]}</span>"},
                 mode="number+delta",
                 delta={'reference': previous, 'relative': True, "valueformat": ".2%"},
             ), row=i + 1, col=2
@@ -51,8 +51,8 @@ def create_fig_subs_inds(subs, selected_channel):
         font_family="Georgia",
         font_size=12,
         margin=dict(l=40, r=20, t=40, b=10),
-        paper_bgcolor= '#ffb347', #'rgba(0,0,0,0)',
-        plot_bgcolor= '#ffb347', #'rgba(0,0,0,0)',
+        paper_bgcolor= bgcolor, #'rgba(0,0,0,0)',
+        plot_bgcolor= bgcolor, #'rgba(0,0,0,0)',
         xaxis=dict(
             rangeselector=dict(  # Добавляем элементы управления диапазоном
                 bgcolor='#f5dfbf',  # Фоновый цвет области с кнопками
