@@ -2,18 +2,18 @@ import pandas as pd
 import streamlit as st
 from datetime import date
 
-from data_processing import load_data, process_data
-from functions import date_ago, convert_date, get_gradient_color, get_current_previous_sums,  hex_to_rgb, \
+from preparation_data.data_processing import load_data, process_data
+from preparation_data.functions import date_ago, convert_date, get_gradient_color, get_current_previous_sums,  hex_to_rgb, \
     interpolate_color, gradient_color_func, calculate_mean_max_subs, calculate_mean_posts, calculate_mean_views, \
     calculate_mean_reacts, load_stopwords_from_file
-from fig_posts_inds import create_fig_posts_inds
-from fig_subs_inds import create_fig_subs_inds
-from fig_heatmap import create_heatmap
-from fig_subs_pos_neg import create_subs_pos_neg, create_slider
-from fig_bubble import create_bubble_fig
-from fig_table_views import table_views, styled_df
-from fig_image import make_image, prepare_data
-from fig_table_top5 import create_table_top5
+from graph_functions.fig_posts_inds import create_fig_posts_inds
+from graph_functions.fig_subs_inds import create_fig_subs_inds
+from graph_functions.fig_heatmap import create_heatmap
+from graph_functions.fig_subs_pos_neg import create_subs_pos_neg, create_slider
+from graph_functions.fig_bubble import create_bubble_fig
+from graph_functions.fig_table_views import table_views, styled_df
+from graph_functions.fig_image import make_image, prepare_data
+from graph_functions.fig_table_top5 import create_table_top5
 
 
 bgcolor = '#ffb347'
