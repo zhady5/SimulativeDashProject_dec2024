@@ -48,5 +48,5 @@ def plot_wordcloud(data, bgcolor ='#f5dfbf'):
 
 def make_image(df_words, bgcolor ='#f5dfbf'):
     img = BytesIO()
-    plot_wordcloud(data=df_words, , bgcolor ).save(img, format='PNG')
+    plot_wordcloud(data=df_words, bgcolor ).save(img, format='PNG')
     return 'data:image/png;base64,{}'.format(base64.b64encode(img.getvalue()).decode())
