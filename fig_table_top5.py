@@ -61,7 +61,7 @@ def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
     data_post_subs_neg = post_subs_changes.nsmallest(5, 'subs_change_neg')[['post_id', 'subs_change_neg']].rename(columns={'subs_change_neg': 'subs_change'})
 
     
-    data_post_subs = pd.concat([data_post_subs_pos, data_post_subs_neg], axis=0)
+    data_post_subs = pd.concat([data_post_subs_pos, data_post_subs_neg], axis=0).reset_index(drop=True)
     
     df = pd.concat([data_views,  data_react_sum ,  data_idx_active, data_post_subs], axis=1)
     
