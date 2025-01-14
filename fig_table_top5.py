@@ -216,7 +216,7 @@ def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
     plt.text(0.5, 0.91, header_text, transform=fig.transFigure, **header_props)
     
     # Adding the subtitle at the top in gray
-    subtitle_text = "\n Все посты сравниваются в рамках одного канала. \n Отображаются топ-5 постов с наивысшими показателями и топ-5 с наихудшими показателями на текущий момент. "
+    subtitle_text = "\n Таблица включает топ-5 постов с лучшими и худшими показателями по просмотрам, реакциям, индексу вовлеченности и динамике подписок. \n Анализ поможет понять, какой контент привлекает больше внимания, вызывает активность и влияет на рост аудитории. "
     subtitle_props = {'fontsize': 14, 'va': 'center', 'ha': 'center', 'color': '#666'}
     plt.text(0.5, 0.89, subtitle_text, transform=fig.transFigure, **subtitle_props)
     
