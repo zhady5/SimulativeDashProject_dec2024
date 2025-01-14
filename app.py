@@ -19,7 +19,7 @@ from fig_table_top5 import create_table_top5
 
 #processed_data = process_data(channels, posts, reactions, subscribers, views)
 
-st.set_page_config(layout="wide", page_icon="🅢",)
+st.set_page_config(layout="wide", page_icon="📊",)
 # Стили заголовков и подзаголовков
 st.markdown("""
 <style>
