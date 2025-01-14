@@ -17,7 +17,7 @@ import json
 import logging
 
 from data_processing import process_data
-from fig_table_views import create_table
+from graph_functions.fig_table_views import create_table
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -220,12 +220,12 @@ def job():
         branch = "master"
 
         file_paths = {
-            "channels": "data_processing/channels.csv",
-            "posts": "data_processing/posts.csv",
-            "subscribers": "data_processing/subscribers.csv",
-            "post_view": "data_processing/post_view.csv",
-            "gr_pvr": "data_processing/gr_pvr.csv",
-            "table_day_views": "data_processing/table_day_views.csv",
+            "channels": "prepared_tables/channels.csv",
+            "posts": "prepared_tables/posts.csv",
+            "subscribers": "prepared_tables/subscribers.csv",
+            "post_view": "prepared_tables/post_view.csv",
+            "gr_pvr": "prepared_tables/gr_pvr.csv",
+            "table_day_views": "prepared_tables/table_day_views.csv",
         }
 
         for table, file_path in file_paths.items():
