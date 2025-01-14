@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
 
-def create_subs_pos_neg(subs, channel, date_range):
+def create_subs_pos_neg(subs, channel, date_range, bgcolor='#ffb347', word_color = '#666'):
     if channel is None or date_range is None:
         st.write({})  # Вывод пустой фигуры
         return
@@ -43,8 +43,8 @@ def create_subs_pos_neg(subs, channel, date_range):
 
     fig.update_layout(
         showlegend=False,
-        paper_bgcolor= '#ffb347',
-        plot_bgcolor=  '#ffb347',
+        paper_bgcolor= bgcolor,
+        plot_bgcolor=  bgcolor,
         font_family='Georgia',
         title_font_size=24,
         title_x=0.5,
