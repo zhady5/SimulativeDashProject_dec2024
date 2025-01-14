@@ -170,8 +170,8 @@ def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
     def is_number(obj):
         return isinstance(obj, Number)
         
-    for n in [4]:
-        df[f'ID поста ({n})'] = df[f'ID поста ({n})'].apply(lambda c: str(c)[:-2] if is_number(c) else c)
+    #for n in [4,5]:
+    #    df[f'ID поста ({n})'] = df[f'ID поста ({n})'].apply(lambda c: str(c)[:-2] if is_number(c) else c)
     
     fig, ax = plt.subplots(figsize=(20, 22))
     
