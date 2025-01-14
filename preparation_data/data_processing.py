@@ -106,7 +106,7 @@ def load_data():
     # Получаем текущую рабочую директорию
     current_dir = os.getcwd()
     # Путь к папке 'data' относительно текущей директории
-    folder_path = os.path.join(current_dir, "data_processing")
+    folder_path = os.path.join(current_dir, "prepared_tables")
     
     # Проверяем существование папки 'data'
     if not os.path.exists(folder_path):
