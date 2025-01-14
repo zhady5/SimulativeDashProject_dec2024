@@ -27,51 +27,75 @@ def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
                       ]][posts.channel_name == channel].sort_values(by='datetime').copy()
         p.columns = ['post_id', 'datetime', 'channel_name']
         p['datetime'] = p['datetime'].apply(lambda d: pd.Timestamp(d))
-
         s = subs[['id', 'datetime', 'subs_cnt', 'channel_name','subs_change', 'subs_change_pos', 'subs_change_neg'
                                                                  ]][subs.channel_name == channel].sort_values(by='datetime').copy()
         s['datetime'] = s['datetime'].apply(lambda d: pd.Timestamp(d))
-
         df = pd.merge_asof(s, p, on='datetime', by = 'channel_name')
     
         return df.groupby(['channel_name', 'post_id'])[['subs_change', 'subs_change_pos', 'subs_change_neg']].sum().reset_index()
     
+    def get_top(df, col, n=5):
+        top5_views = df.nlargest(n, col)[['post_id', col]]
+        
+        # Исключаем строки с NaN перед конкатенацией
+        top5_views = top5_views.dropna(how='all')
+        
+        return top5_views.reset_index(drop=True)
     
+    
+    def get_bottom(df, col, n=5):
+        bottom5_views = df.nsmallest(n, col)[['post_id', col]].sort_values(by = col, ascending=False)
+        
+        # Исключаем строки с NaN перед конкатенацией
+        bottom5_views = bottom5_views.dropna(how='all')
+        
+        return bottom5_views.reset_index(drop=True)
+    
+    def create_rows5(df, func,  post_subs_changes, col_change, nlargest=1):
+        data_views = func(df, 'current_views', 5)
+        data_react_sum = func(df, 'react_cnt_sum', 5)
+        data_idx_active = func(df, 'idx_active', 5)
+        if nlargest==1:
+            data_post_subs = post_subs_changes[post_subs_changes[col_change]!=0].nlargest(5, col_change)[['post_id', col_change]]\
+                                                                    .rename(columns={col_change: 'subs_change'})\
+                                                                    .reset_index(drop=True)
+        else:
+            data_post_subs = post_subs_changes[post_subs_changes[col_change]!=0].nsmallest(5, col_change)[['post_id', col_change]]\
+                                                                    .rename(columns={col_change: 'subs_change'})\
+                                                                    .reset_index(drop=True)
+        
+        df = pd.concat([data_views,  data_react_sum,  data_idx_active, data_post_subs], axis=1)
+        
+        df.columns = ['ID поста (1)' , 'Текущее количество'
+                      ,'ID поста (2)' , 'Общее количество'
+                       ,'ID поста (3)' , 'Индекс'
+                     ,'ID поста (4)' , 'Подписались\Отписались'
+                     ]
+    
+        return df
+    
+    def correct_data(df):
+        df = df.set_index('ID поста (1)')   
+    
+        df = df.fillna('')
+    
+        def is_number(obj):
+            return isinstance(obj, Number)
+            
+        df['ID поста (4)'] = df['ID поста (4)'].apply(lambda c: str(c).split('.')[0] if is_number(c) else c)
+    
+        return df
+
     post_subs_changes = df_cnt_sub_between_posts(posts, subs, channel)
-    
+
     df_cols = ['channel_name', 'post_id','post_datetime', 'current_views', 
              'react_cnt_sum', 'idx_active']
     df = gr_pvr[df_cols][gr_pvr.channel_name == channel].sort_values(by='current_views', ascending=False).drop_duplicates()
     
-    def get_top_bottom(df, col, n=5):
-        top5_views = df.nlargest(n, col)[['post_id', col]]
-        bottom5_views = df.nsmallest(n, col)[['post_id', col]].sort_values(by = col, ascending=False)
-        
-        # Исключаем строки с NaN перед конкатенацией
-        top5_views = top5_views.dropna(how='all')
-        bottom5_views = bottom5_views.dropna(how='all')
-        
-        return pd.concat([top5_views,  bottom5_views], axis=0).reset_index(drop=True)
+    top5 = create_rows5(df, get_top, post_subs_changes, 'subs_change_pos')
+    bottom5 = create_rows5(df, get_bottom, post_subs_changes, 'subs_change_neg', 0)
     
-    data_views = get_top_bottom(df, 'current_views', 5)
-    data_react_sum = get_top_bottom(df, 'react_cnt_sum', 5)
-    data_idx_active = get_top_bottom(df, 'idx_active', 5)
-    
-    data_post_subs_pos = post_subs_changes.nlargest(5, 'subs_change_pos')[['post_id', 'subs_change_pos']].rename(columns={'subs_change_pos': 'subs_change'})
-    data_post_subs_neg = post_subs_changes.nsmallest(5, 'subs_change_neg')[['post_id', 'subs_change_neg']].rename(columns={'subs_change_neg': 'subs_change'}).sort_values(by='subs_change', ascending=False)
-
-    
-    data_post_subs = pd.concat([data_post_subs_pos, data_post_subs_neg], axis=0).reset_index(drop=True)
-    
-    df = pd.concat([data_views,  data_react_sum ,  data_idx_active, data_post_subs], axis=1)
-    
-    df.columns = ['ID поста (1)' , 'Текущее количество'
-                  ,'ID поста (2)' , 'Общее количество'
-                   ,'ID поста (3)' , 'Индекс'
-                 ,'ID поста (4)' , 'Подписались\Отписались'
-                 ]
-    
-    df = df.set_index('ID поста (1)')
+    df = pd.concat([top5, bottom5], axis=0)
     
     #cmap_colors = 
     cmap_colors =  matplotlib.cm.autumn  #matplotlib.cm.get_cmap('afmhot').reversed()
@@ -165,13 +189,7 @@ def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
     plt.rcParams["font.family"] = ["DejaVu Sans"]
     plt.rcParams["savefig.bbox"] = "tight"
     
-    df = df.fillna('')
-    
-    def is_number(obj):
-        return isinstance(obj, Number)
-        
-    #for n in [4,5]:
-    #    df[f'ID поста ({n})'] = df[f'ID поста ({n})'].apply(lambda c: str(c)[:-2] if is_number(c) else c)
+    df_final = correct_data(df)
     
     fig, ax = plt.subplots(figsize=(20, 22))
     
@@ -180,7 +198,7 @@ def create_table_top5(posts, subs, gr_pvr,  channel, color_phone='#FFA500'):
     ax.set_facecolor(color_phone)
     
     table = Table(
-        df,
+        df_final,
         column_definitions=col_defs,
         row_dividers=True,
         footer_divider=True,
