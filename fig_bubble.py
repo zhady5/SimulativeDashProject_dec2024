@@ -9,7 +9,7 @@ import datetime
 import colorlover as cl
 
 
-def create_bubble_fig(filtered_df, color_phone = '#ffb347', word_color = '#666'):
+def create_bubble_fig(filtered_df, bgcolor = '#ffb347', word_color = '#666'):
 #table
         gr_pvr_sum = filtered_df.drop(['reaction_type', 'react_cnt'], axis=1).drop_duplicates()
     
@@ -67,8 +67,8 @@ def create_bubble_fig(filtered_df, color_phone = '#ffb347', word_color = '#666')
             ),
             margin=dict(l=40, r=60, t=10, b=10),
             showlegend=False,
-            paper_bgcolor = color_phone,
-            plot_bgcolor = color_phone,
+            paper_bgcolor = bgcolor,
+            plot_bgcolor = bgcolor,
             hovermode='closest',
         )
         return fig    
