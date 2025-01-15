@@ -43,7 +43,7 @@ def table_views(table_day_views, max_days, channel):
     return sub_tab_final
 
 
-def styled_df(df):
+def styled_df(df, dark_color = '#8B0000'):
     def contains_substring(string, substring):
         # Если подстрока найдена в исходной строке, возвращаем True
         if substring in string:
@@ -66,7 +66,7 @@ def styled_df(df):
         # Аналогично проверяем для медианных значений
         elif isinstance(cell_value, str) and any(keyword in cell_value for keyword in keywords_median) \
                 and len(cell_value.split(' (')[1].split('.')[0]) > 1:
-            return 'color: #8B0000'
+            return f'color: {dark_color}'
         
         # И наконец, для bottom значений
         elif isinstance(cell_value, str) and any(keyword in cell_value for keyword in keywords_bottom) \
@@ -87,7 +87,7 @@ def styled_df(df):
     
       # Установка стиля для заголовков
     styled_df.set_table_styles([
-        {'selector': 'th', 'props': [('color', '#8B0000')]},
+        {'selector': 'th', 'props': [('color', dark_color)]},
          {'selector': 'tr', 'props': [('border-bottom', '0.5px solid gray')]},
     ])
     
