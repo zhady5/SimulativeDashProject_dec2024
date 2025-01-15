@@ -82,6 +82,9 @@ def create_table_top5(posts, post_view, subs, gr_pvr,  channel, bgcolor='#FFA500
         df = df.set_index('ID поста (1)')   
     
         df = df.fillna('')
+
+        for c in df.columns:
+            df[c] = df[c].astype(int)
     
         def is_number(obj):
             return isinstance(obj, Number)
