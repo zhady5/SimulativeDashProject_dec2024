@@ -13,6 +13,10 @@ def load_stopwords_from_file(file_path):
         stopwords = [line.strip() for line in file]
     return stopwords
 
+with open('palettes.txt', 'r', encoding='utf-8') as file:
+    content = file.read()
+palettes = content.replace("'", "").split(',')
+
 file_path = 'stopwords-ru.txt'
 puncts = set(list(string.punctuation) + ['—', '»', '«', '``', '–', "''"])
 stopwords_ru = set(load_stopwords_from_file(file_path))
@@ -46,10 +50,10 @@ def plot_wordcloud(data):
     wc.fit_words(d)
     return wc.to_image()
 
-def make_image(df_words, contr_color = '#f5dfbf', start_color_words = '#8B0000', end_color_words = '#ffb347'):
+def make_image(df_words, contr_color = '#f5dfbf', palette_num = 21):
     img = BytesIO()
     d = {a: x for a, x in df_words.values}
-    wc = WordCloud(background_color='#f5dfbf', colormap='Meerkat') #start_color = '#8B0000', end_color = '#ffb347'
+    wc = WordCloud(background_color=contr_color, colormap=palettes[palette_num]) #start_color = '#8B0000', end_color = '#ffb347'
     wc.fit_words(d)
     wc.to_image().save(img, format='PNG')
     #plot_wordcloud(data=df_words).save(img, format='PNG')
