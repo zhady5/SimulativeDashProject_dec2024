@@ -12,14 +12,14 @@ import colorlover as cl
 def create_bubble_fig(filtered_df, bgcolor = '#ffb347', word_color = '#666', colors = cl.scales['9']['seq']['OrRd'][::-1] ):
         # Проверяем, что дата присутствует и не пуста
         if len(filtered_df) == 0:
-            st.write({})
+            st.write('нет данных')
             return
-#table
-        gr_pvr_sum = filtered_df.drop(['reaction_type', 'react_cnt'], axis=1).drop_duplicates()
-    
-        if gr_pvr_sum.shape[0] == 0:
-            st.write({})
-            return
+        else:
+            gr_pvr_sum = filtered_df.drop(['reaction_type', 'react_cnt'], axis=1).drop_duplicates()
+            
+            if gr_pvr_sum.shape[0] == 0:
+                st.write({})
+                return
         
         # Создаем градиент 
         #colors = cl.scales['9']['seq']['OrRd'][::-1] 
