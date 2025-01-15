@@ -86,9 +86,7 @@ def create_table_top5(posts, post_view, subs, gr_pvr,  channel, bgcolor='#FFA500
         def is_number(obj):
             return isinstance(obj, Number)
             
-        #df['ID поста (4)'] = df['ID поста (4)'].apply(lambda c: str(c).split('.')[0] if is_number(c) else c)
-        for c in df.columns:
-            df[c] = df[c].apply(lambda v: str(v).split('.')[0] if is_number(v) else v)
+        df['ID поста (4)'] = df['ID поста (4)'].apply(lambda c: str(c).split('.')[0] if is_number(c) else c)
     
         return df
 
