@@ -87,7 +87,7 @@ def create_table_top5(posts, post_view, subs, gr_pvr,  channel, bgcolor='#FFA500
             return isinstance(obj, Number)
             
         df['ID поста (4)'] = df['ID поста (4)'].apply(lambda c: str(c).split('.')[0] if is_number(c) else c)
-        df['current_views'] = df['current_views'].astype(int)
+        df['Текущее количество'] = df['Текущее количество'].astype(int)
     
         return df
 
