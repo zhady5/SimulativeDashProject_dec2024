@@ -6,7 +6,7 @@ import streamlit as st
 from preparation_data.functions import get_current_previous_sums
 
 
-def create_fig_posts_inds(posts, selected_channel, bgcolor='#ffb347', word_color = '#666'):
+def create_fig_posts_inds(posts, selected_channel, bgcolor='#ffb347', word_color = '#666', contr_color='#f5dfbf', color_Nx_size='#8B4513'):
     
     # График по публикациям
     subdf_posts = posts[posts.channel_name == selected_channel][['channel_name', 'date', 'cnt']].drop_duplicates()
@@ -24,7 +24,7 @@ def create_fig_posts_inds(posts, selected_channel, bgcolor='#ffb347', word_color
     )
     
     mean_cnt = subdf_posts.cnt.mean()
-    colors = ['#8B4513' if val >= 2 * mean_cnt else '#F5DEB3' for val in subdf_posts['cnt']]
+    colors = [color_Nx_size if val >= 2 * mean_cnt else contr_color for val in subdf_posts['cnt']]
     
     fig_posts.add_trace(go.Bar(x=subdf_posts.date, y=subdf_posts.cnt, marker_color=colors,
                                hovertemplate='%{x} <br>Публикаций: %{y}<extra></extra>'), row=1, col=1)
@@ -52,10 +52,10 @@ def create_fig_posts_inds(posts, selected_channel, bgcolor='#ffb347', word_color
         plot_bgcolor= bgcolor, #'rgba(0,0,0,0)',
         xaxis=dict(
             rangeselector=dict(  # Добавляем элементы управления диапазоном
-                bgcolor='#f5dfbf',  # Фоновый цвет области с кнопками
+                bgcolor=contr_color,  # Фоновый цвет области с кнопками
                 font=dict(color="#333"),  # Цвет текста на кнопках
                 activecolor=bgcolor,  # Цвет активной кнопки
-                bordercolor='#f5dfbf',  # Цвет рамки вокруг кнопок
+                bordercolor=contr_color,  # Цвет рамки вокруг кнопок
                 buttons=list([
                     dict(count=2, label="2д", step="day", stepmode="backward"),
                     dict(count=14, label="2н", step="day", stepmode="backward"),
