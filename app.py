@@ -179,7 +179,7 @@ def main():
         # Кастомный CSS для скрытия подписей под слайдером
         st.markdown(""" <style> .stSlider .st-cl::after { content: ""; } </style> """, unsafe_allow_html=True)
         slider = create_slider(subs, selected_channel)
-        fig_subs_pos_neg = create_subs_pos_neg(subs, selected_channel, slider) #, bgcolor, word_color
+        fig_subs_pos_neg = create_subs_pos_neg(subs, selected_channel, slider, bgcolor, word_color) 
         st.plotly_chart(fig_subs_pos_neg, use_container_width=True)
 
         #---------------------------------------------------------------------------------------------------------------------
