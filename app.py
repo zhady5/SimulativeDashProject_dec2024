@@ -159,8 +159,8 @@ def main():
     # БЛОК 3
     #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    fig_posts = create_fig_posts_inds(posts, selected_channel, bgcolor, word_color)
-    fig_subs = create_fig_subs_inds(subs, selected_channel, bgcolor, word_color)
+    fig_posts = create_fig_posts_inds(posts, selected_channel) #, bgcolor, word_color
+    fig_subs = create_fig_subs_inds(subs, selected_channel) #, bgcolor, word_color
     # 
     col1, gap_col, col2 = st.columns([0.47, 0.06, 0.47])
     with col1:
@@ -179,7 +179,7 @@ def main():
         # Кастомный CSS для скрытия подписей под слайдером
         st.markdown(""" <style> .stSlider .st-cl::after { content: ""; } </style> """, unsafe_allow_html=True)
         slider = create_slider(subs, selected_channel)
-        fig_subs_pos_neg = create_subs_pos_neg(subs, selected_channel, slider, bgcolor, word_color) #, slider
+        fig_subs_pos_neg = create_subs_pos_neg(subs, selected_channel, slider) #, bgcolor, word_color
         st.plotly_chart(fig_subs_pos_neg, use_container_width=True)
 
         #---------------------------------------------------------------------------------------------------------------------
@@ -216,7 +216,7 @@ def main():
         else:  # "all (6м)"
             filtered_bubble = gr_pvr[(gr_pvr.channel_name == selected_channel)&(pd.to_datetime(gr_pvr.post_datetime)>=date_ago('months', 6))]
         
-        fig_bubble = create_bubble_fig(filtered_bubble, bgcolor, word_color)
+        fig_bubble = create_bubble_fig(filtered_bubble) #, bgcolor, word_color
         st.plotly_chart(fig_bubble, use_container_width=True)
         
     with col2:
@@ -266,7 +266,7 @@ def main():
                                 (pd.to_datetime(posts.date) >= date_ago('months', 6))]
 
         # Отображение тепловой карты
-        st.plotly_chart(create_heatmap(filtered_df, bgcolor, word_color), use_container_width=True)
+        st.plotly_chart(create_heatmap(filtered_df), use_container_width=True) #, bgcolor, word_color
 
 
         #---------------------------------------------------------------------------------------------------------------------
@@ -304,7 +304,7 @@ def main():
 
     
 
-    st.pyplot(create_table_top5(posts, subs, gr_pvr,  selected_channel, bgcolor, word_color))
+    st.pyplot(create_table_top5(posts, subs, gr_pvr,  selected_channel)) #, bgcolor, word_color
 
          
 
