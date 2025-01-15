@@ -159,8 +159,8 @@ def main():
     # БЛОК 3
     #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    fig_posts = create_fig_posts_inds(posts, selected_channel) #, bgcolor, word_color
-    fig_subs = create_fig_subs_inds(subs, selected_channel) #, bgcolor, word_color
+    fig_posts = create_fig_posts_inds(posts, selected_channel, bgcolor, word_color) #
+    fig_subs = create_fig_subs_inds(subs, selected_channel, bgcolor, word_color) #, bgcolor, word_color
     # 
     col1, gap_col, col2 = st.columns([0.47, 0.06, 0.47])
     with col1:
