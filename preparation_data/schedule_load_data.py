@@ -25,6 +25,9 @@ logger = logging.getLogger(__name__)
 
 #load_dotenv(dotenv_path='.gitignore/.env') 
 
+repo_owner = "zhady5"
+repo_name = "SimulativeDashProject_dec2024"
+branch = "master"
 
 
 # Функция для подключения к базе данных
@@ -150,7 +153,7 @@ def upload_to_github(encoded_data, repo_owner, repo_name, branch, github_token, 
     return rename_response.json()
 
 # Основная функция для планирования задачи
-def job():
+def job(repo_owner, repo_name, branch):
     try:
         conn = connect_to_db()
         cursor = conn.cursor()
@@ -215,9 +218,9 @@ def job():
         print('conn_close')
         # Загрузка данных в репозиторий GitHub
         github_token = os.environ.get("DASH_TOKEN")
-        repo_owner = "zhady5"
-        repo_name = "SimulativeDashProject_dec2024"
-        branch = "master"
+        #repo_owner = "zhady5"
+        #repo_name = "SimulativeDashProject_dec2024"
+        #branch = "master"
 
         file_paths = {
             "channels": "prepared_tables/channels.csv",
@@ -242,7 +245,7 @@ def job():
 
 if __name__ == "__main__":
     print("Скрипт начал выполнение")
-    job()
+    job(repo_owner, repo_name, branch)
     print("Скрипт завершил выполнение")
 
 
