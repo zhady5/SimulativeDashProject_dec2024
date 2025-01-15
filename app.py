@@ -25,6 +25,7 @@ metrics_number_color = 'brown' # цвет цифр у метрик
 graph_color='#F5DEB3'
 color_Nx_size='#8B4513' # цвет для выделения N-кратного значения в графике с постами
 
+
 colors_gradient_bubble = cl.scales['9']['seq']['OrRd'][::-1] # Создаем градиент для пузырькового графика
 
 #для примера другие градиенты
@@ -181,7 +182,7 @@ def main():
     #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     fig_posts = create_fig_posts_inds(posts, selected_channel, bgcolor, word_color, contr_color, graph_color, color_Nx_size) #
-    fig_subs = create_fig_subs_inds(subs, selected_channel, bgcolor, word_color) #, bgcolor, word_color
+    fig_subs = create_fig_subs_inds(subs, selected_channel, bgcolor, word_color, contr_color, graph_color) #, bgcolor, word_color
     # 
     col1, gap_col, col2 = st.columns([0.47, 0.06, 0.47])
     with col1:
