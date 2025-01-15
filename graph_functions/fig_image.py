@@ -6,7 +6,7 @@ import string
 import pandas as pd
 from collections import Counter
 import re
-from preparation_data.functions import  gradient_color_func 
+#from preparation_data.functions import  gradient_color_func 
 
 def load_stopwords_from_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -43,12 +43,6 @@ def prepare_data(posts, channel):
     words = posts_channel.text.apply(lambda t: clean_text(t)).tolist()
     df_words = pd.DataFrame(Counter(sum(words, [])).most_common(50), columns=['word', 'count'])
     return df_words
-
-def plot_wordcloud(data):
-    d = {a: x for a, x in data.values}
-    wc = WordCloud(background_color='#f5dfbf', color_func=gradient_color_func(start_color_words, end_color_words))  # , width=480, height=360, 
-    wc.fit_words(d)
-    return wc.to_image()
 
 def make_image(df_words, contr_color = '#f5dfbf', palette_num = 21):
     img = BytesIO()
