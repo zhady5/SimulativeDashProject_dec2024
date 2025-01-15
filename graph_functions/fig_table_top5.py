@@ -20,7 +20,7 @@ from plottable.cmap import normed_cmap
 from plottable.plots import circled_image # image
 
 
-def create_table_top5(posts, subs, gr_pvr,  channel, bgcolor='#FFA500', word_color='#666'):
+def create_table_top5(posts, subs, gr_pvr,  channel, bgcolor='#FFA500', word_color='#666', cmap_colors = matplotlib.cm.autumn):
     
     def df_cnt_sub_between_posts(posts, subs, channel):
         p = posts[['id', 'datetime', 'channel_name' 
@@ -97,8 +97,7 @@ def create_table_top5(posts, subs, gr_pvr,  channel, bgcolor='#FFA500', word_col
     
     df = pd.concat([top5, bottom5], axis=0)
     
-    #cmap_colors = 
-    cmap_colors =  matplotlib.cm.autumn  #matplotlib.cm.get_cmap('afmhot').reversed()
+    #cmap_colors =  matplotlib.cm.autumn  #matplotlib.cm.get_cmap('afmhot').reversed()
     
     cmap = LinearSegmentedColormap.from_list(
         name="lavender_to_midnight", colors= ['#FFFFFF', '#E6E6FA', '#9370DB', '#4B0082', '#191970'], N=256
