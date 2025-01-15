@@ -16,7 +16,7 @@ from graph_functions.fig_image import make_image, prepare_data
 from graph_functions.fig_table_top5 import create_table_top5
 
 
-bgcolor =  '#ff845c' #'#ffb347'
+bgcolor =  '#ffb347'
 word_color = '#333' #'#666'
 
 st.set_page_config(layout="wide", page_icon="📊",)
