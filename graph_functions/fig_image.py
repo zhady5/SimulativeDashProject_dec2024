@@ -49,7 +49,7 @@ def plot_wordcloud(data):
 def make_image(df_words, contr_color = '#f5dfbf', start_color_words = '#8B0000', end_color_words = '#ffb347'):
     img = BytesIO()
     d = {a: x for a, x in df_words.values}
-    wc = WordCloud(background_color='#f5dfbf', color_func=gradient_color_func(start_color_words, end_color_words)) #start_color = '#8B0000', end_color = '#ffb347'
+    wc = WordCloud(background_color='#f5dfbf', color=gradient_color_func(start_color_words, end_color_words)) #start_color = '#8B0000', end_color = '#ffb347'
     wc.fit_words(d)
     wc.to_image().save(img, format='PNG')
     #plot_wordcloud(data=df_words).save(img, format='PNG')
