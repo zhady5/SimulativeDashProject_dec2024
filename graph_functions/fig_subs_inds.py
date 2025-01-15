@@ -6,7 +6,7 @@ import streamlit as st
 from preparation_data.functions import get_current_previous_sums
 
 
-def create_fig_subs_inds(subs, selected_channel, bgcolor='#ffb347', word_color = '#666'):
+def create_fig_subs_inds(subs, selected_channel, bgcolor='#ffb347', word_color = '#666', contr_color='#f5dfbf', line_color='#F5DEB3'):
     
     # График по подписчикам
     subdf_subs = subs[subs.channel_name == selected_channel][['channel_name', 'date', 'subs_cnt', 'subs_change']].drop_duplicates()
@@ -24,12 +24,14 @@ def create_fig_subs_inds(subs, selected_channel, bgcolor='#ffb347', word_color =
     )
     
     mean_subs = subdf_subs.subs_cnt.mean()
-    colors = ['#8B4513' if val >= 2 * mean_subs else '#F5DEB3' for val in subdf_subs['subs_cnt']]
+    #colors = ['#8B4513' if val >= 2 * mean_subs else '#F5DEB3' for val in subdf_subs['subs_cnt']]
     
     #fig_subs.add_trace(go.Bar(x=subdf_subs.date, y=subdf_subs.subs_cnt, marker_color=colors,
     #                          hovertemplate='%{x} <br>Подписчиков: %{y}<extra></extra>'), row=1, col=1)
 
-    fig_subs.add_trace(go.Scatter(x=subdf_subs.date, y=subdf_subs.subs_cnt, fill='tozeroy', mode='lines+markers', line_color='#F5DEB3', marker_color='#f5dfbf', marker_line_color='#f5dfbf', marker_line_width=1,  marker_size=5,
+    fig_subs.add_trace(go.Scatter(x=subdf_subs.date, y=subdf_subs.subs_cnt, fill='tozeroy', mode='lines+markers'
+                                  , line_color=line_color, marker_color=contr_color, marker_line_color='contr_color
+                                  , marker_line_width=1,  marker_size=5,
                               hovertemplate='%{x} <br>Подписчиков: %{y}<extra></extra>'), row=1, col=1)
     
     period_names = dict({'days': 'вчера', 'weeks': 'неделю', 'months': 'месяц'})
@@ -55,10 +57,10 @@ def create_fig_subs_inds(subs, selected_channel, bgcolor='#ffb347', word_color =
         plot_bgcolor= bgcolor, #'rgba(0,0,0,0)',
         xaxis=dict(
             rangeselector=dict(  # Добавляем элементы управления диапазоном
-                bgcolor='#f5dfbf',  # Фоновый цвет области с кнопками
-                font=dict(color="#333"),  # Цвет текста на кнопках
-                activecolor='#ffb347',  # Цвет активной кнопки
-                bordercolor='#f5dfbf',  # Цвет рамки вокруг кнопок
+                bgcolor=contr_color,  # Фоновый цвет области с кнопками
+                font=dict(color=word_color),  # Цвет текста на кнопках
+                activecolor=bgcolor,  # Цвет активной кнопки
+                bordercolor=contr_color,  # Цвет рамки вокруг кнопок
                 buttons=list([
                     dict(count=2, label="2д", step="day", stepmode="backward"),
                     dict(count=14, label="2н", step="day", stepmode="backward"),
