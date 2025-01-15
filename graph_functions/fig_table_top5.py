@@ -21,6 +21,10 @@ from plottable.plots import circled_image # image
 
 
 def create_table_top5(posts, subs, gr_pvr,  channel, bgcolor='#FFA500', word_color='#666', cmap_colors = matplotlib.cm.autumn):
+    # Проверяем, что дата присутствует и не пуста
+    if len(posts) == 0 or len(subs) == 0 or len(gr_pvr) == 0:
+        st.write({})
+        return
     
     def df_cnt_sub_between_posts(posts, subs, channel):
         p = posts[['id', 'datetime', 'channel_name' 
