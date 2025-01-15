@@ -27,6 +27,8 @@
 
 └── `stopwords-ru.txt`        # Список стоп-слов для русского языка
 
+└── `palettes.txt`            # Список палеток для окрашивания слов в облаке слов
+
 
 ## Требования
 
@@ -48,6 +50,8 @@
   source venv/bin/activate  # Для Windows: venv\Scripts\activate
 3. Установка зависимостей:
   pip install -r requirements.txt
+4. Note:
+   в файле `preparation_data/schedule_load_data.py` поменять значения переменных `repo_owner`, `repo_name`, `branch`
 
 ## Обработка данных
 
