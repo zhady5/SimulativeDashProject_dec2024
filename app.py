@@ -24,8 +24,8 @@ metrics_number_color = 'brown' # цвет цифр у метрик
 
 graph_color='#F5DEB3'
 color_Nx_size='#8B4513' # цвет для выделения N-кратного значения в графике с постами
-color_neg_values = '#8B0000'
-
+color_neg_values = '#8B0000' # цвет для отписавшихся подписчиков
+max_color_heatmap = "#006a4e" # цвет для наличия постов в матрице для графика публикаций
 colors_gradient_bubble = cl.scales['9']['seq']['OrRd'][::-1] # Создаем градиент для пузырькового графика
 
 #для примера другие градиенты
@@ -35,8 +35,7 @@ colors_gradient_bubble = cl.scales['9']['seq']['OrRd'][::-1] # Создаем г
 #cl.scales['9']['seq']['PuBu']: Переходы от пурпурного к голубому.
 #cl.scales['9']['seq']['Greys']: Оттенки серого, от белого до черного.
 
-min_color_heatmap = '#F5DEB3' # цвет для отсутсвия постов в матрице для графика публикаций
-max_color_heatmap = "#006a4e" # цвет для наличия постов в матрице для графика публикаций
+
 palette_num = 21 # в файле 172 палетки для раскрашивания слов в облаке слов
 
 
@@ -288,7 +287,7 @@ def main():
                                 (pd.to_datetime(posts.date) >= date_ago('months', 6))]
 
         # Отображение тепловой карты
-        st.plotly_chart(create_heatmap(filtered_df, bgcolor, word_color, min_color_heatmap, max_color_heatmap), use_container_width=True)
+        st.plotly_chart(create_heatmap(filtered_df, bgcolor, word_color, graph_color, max_color_heatmap), use_container_width=True)
 
 
         #---------------------------------------------------------------------------------------------------------------------
