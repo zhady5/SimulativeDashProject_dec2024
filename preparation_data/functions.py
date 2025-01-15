@@ -79,9 +79,9 @@ def interpolate_color(start_color, end_color, steps):
              int(start_g + i * step_g),
              int(start_b + i * step_b)) for i in range(steps)]
 
-def gradient_color_func(word=None, font_size=None, position=None, orientation=None, font_path=None, random_state=None):
-    start_color = hex_to_rgb('#8B0000')
-    end_color = hex_to_rgb('#ffb347')
+def gradient_color_func(start_color = '#8B0000', end_color = '#ffb347', word=None, font_size=None, position=None, orientation=None, font_path=None, random_state=None):
+    start_color = hex_to_rgb(start_color)
+    end_color = hex_to_rgb(end_color)
     num_steps = 50  # Количество шагов равно количеству слов
     colors = interpolate_color(start_color, end_color, num_steps)
     index = random.randint(0, num_steps - 1)  # Случайное число от 0 до количества слов
