@@ -24,7 +24,7 @@ def create_fig_posts_inds(posts, selected_channel, bgcolor='#ffb347', word_color
     )
     
     mean_cnt = subdf_posts.cnt.mean()
-    colors = [color_Nx_size if val >= 2 * mean_cnt else contr_color for val in subdf_posts['cnt']]
+    colors = [color_Nx_size if val >= 2 * mean_cnt else graph_color for val in subdf_posts['cnt']]
     
     fig_posts.add_trace(go.Bar(x=subdf_posts.date, y=subdf_posts.cnt, marker_color=colors,
                                hovertemplate='%{x} <br>Публикаций: %{y}<extra></extra>'), row=1, col=1)
