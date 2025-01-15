@@ -16,8 +16,10 @@ from graph_functions.fig_image import make_image, prepare_data
 from graph_functions.fig_table_top5 import create_table_top5
 
 
-bgcolor =  '#ffb347'
-word_color = '#333' #'#666'
+bgcolor =  '#ffb347' # фон дашборда и графиков
+contr_color = '#f5dfbf' #более светлый цвет для всех графиков и обводок кнопок
+word_color = '#333' #'#666' цвет шрифтов для всех текстов
+metrics_number_color = 'brown' # цвет цифр у метрик
 
 st.set_page_config(layout="wide", page_icon="📊",)
 # Стили заголовков и подзаголовков
@@ -48,7 +50,7 @@ st.markdown(f"""
     .custom-text {{ color: {word_color}; 
                    font-size: 13px; 
                    }} 
-    .custom-number {{ color: brown; 
+    .custom-number {{ color: {metrics_number_color}; 
                      font-weight: bold; 
                      font-size: 17px; }}
     
@@ -67,9 +69,9 @@ st.markdown(f"""
     }}
     .stButton > button {{
         background-color: {bgcolor};
-        border-color: #f5dfbf;
+        border-color: {contr_color};
         color: {word_color};
-        border: 2px solid #f5dfbf;
+        border: 2px solid {contr_color};
         border-radius: 20px;
         padding: 0px 8px;
         font-size: 8px;
@@ -78,13 +80,13 @@ st.markdown(f"""
         font-family: 'Roboto', sans-serif;
     }}
     .stButton > button:hover {{
-        background-color: #f5dfbf;
-        border-color: #f5dfbf;
+        background-color: {contr_color};
+        border-color: {contr_color};
         color: {word_color};
     }}
     .stButton > button:active {{
-        background-color: #f5dfbf;
-        border-color: #f5dfbf;
+        background-color: {contr_color};
+        border-color: {contr_color};
         color: {word_color};
     }}
 </style>
