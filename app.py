@@ -17,24 +17,24 @@ from graph_functions.fig_table_top5 import create_table_top5
 
 
 bgcolor = '#ffb347'
-#processed_data = process_data(channels, posts, reactions, subscribers, views)
+word_color = '#666'
 
 st.set_page_config(layout="wide", page_icon="📊",)
 # Стили заголовков и подзаголовков
-st.markdown("""
+st.markdown(f"""
 <style>
-    .title h1 {
+    .title h1 {{
         font-family: 'Open Sans', sans-serif;
         font-size: 28px;
         line-height: 36px;
         color: #333;
-        background-color: #ffb347;
+        background-color: {bgcolor};
         padding: 0px;
         box-shadow: 0 10px 15px rgba(0,0,0,0.05);
         border-radius: 10px;
         text-align: left;
-    }
-    .subheader h2 {
+    }}
+    .subheader h2 {{
         font-family: 'Open Sans', sans-serif;
         font-size: 16px;
         background-color: #ffb347;
@@ -43,29 +43,29 @@ st.markdown("""
         margin-top: 0px;
         margin-bottom: 0px;
         font-weight: bold;
-    }
+    }}
 
-    .custom-text { color: #666; 
+    .custom-text {{ color: #666; 
                    font-size: 13px; 
-                   } 
-    .custom-number { color: brown; 
+                   }} 
+    .custom-number {{ color: brown; 
                      font-weight: bold; 
-                     font-size: 17px; }
+                     font-size: 17px; }}
     
-    .stApp {
+    .stApp {{
         max-width: 1200px;
         margin: 0 auto;
         background-color: #ffb347;
         padding: 0rem;
         box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .button-container {
+    }}
+    .button-container {{
         display: flex;
         justify-content: flex-start;
         gap: 0px;
         margin-bottom: 0px;
-    }
-    .stButton > button {
+    }}
+    .stButton > button {{
         background-color: #ffb347;
         border-color: #f5dfbf;
         color: #666;
@@ -76,17 +76,17 @@ st.markdown("""
         font-weight: 200;
         white-space: nowrap; 
         font-family: 'Roboto', sans-serif;
-    }
-    .stButton > button:hover {
+    }}
+    .stButton > button:hover {{
         background-color: #f5dfbf;
         border-color: #f5dfbf;
         color: #666;
-    }
-    .stButton > button:active {
+    }}
+    .stButton > button:active {{
         background-color: #f5dfbf;
         border-color: #f5dfbf;
         color: #666;
-    }
+    }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -94,11 +94,6 @@ st.markdown("""
 
 
 def main():
-    
-    #posts = processed_data['posts']
-    #subs = processed_data['subs']
-    #gr_pvr = processed_data['gr_pvr']
-    #post_view = processed_data['post_view']
     channels, gr_pvr, post_view, posts, subs, table_day_views = load_data()
     
     #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -288,7 +283,6 @@ def main():
         df_subset = df[columns_to_show]
         html_table = styled_df(df_subset).to_html()
         # Оборачиваем таблицу в div с фиксированной шириной и прокруткой
-        #scrollable_table = f'<div style="overflow-x:auto;">{html_table}</div>'
         scrollable_table = f'<div style="overflow-x: auto; overflow-y: auto; max-height: 500px;">{html_table}</div>'
         st.write(scrollable_table, unsafe_allow_html=True)
         #---------------------------------------------------------------------------------------------------------------------
