@@ -121,12 +121,12 @@ def load_data():
     #folder_path = os.getcwd()
     #file_list = sorted([f for f in os.listdir(folder_path) if f.endswith('.csv')])
     
-    channels = pd.read_csv(os.path.join(folder_path, file_list[0]))
-    gr_pvr = pd.read_csv(os.path.join(folder_path, file_list[1]))
-    post_view = pd.read_csv(os.path.join(folder_path, file_list[2]))
-    posts = pd.read_csv(os.path.join(folder_path, file_list[3]))
-    subscribers = pd.read_csv(os.path.join(folder_path, file_list[4]))
-    table_day_views = pd.read_csv(os.path.join(folder_path, file_list[5]))
+    channels = pd.read_csv(os.path.join(folder_path, file_list[0]), sep=',', encoding='utf-8')
+    gr_pvr = pd.read_csv(os.path.join(folder_path, file_list[1]), sep=',', encoding='utf-8')
+    post_view = pd.read_csv(os.path.join(folder_path, file_list[2]), sep=',', encoding='utf-8')
+    posts = pd.read_csv(os.path.join(folder_path, file_list[3]), sep=',', encoding='utf-8')
+    subscribers = pd.read_csv(os.path.join(folder_path, file_list[4]), sep=',', encoding='utf-8')
+    table_day_views = pd.read_csv(os.path.join(folder_path, file_list[5]), sep=',', encoding='utf-8')
     
     
     return channels, gr_pvr, post_view, posts, subscribers, table_day_views
