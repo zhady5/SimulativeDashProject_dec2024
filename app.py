@@ -6,8 +6,8 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 from preparation_data.data_processing import load_data, process_data
-from preparation_data.functions import date_ago,  \
-     calculate_mean_max_subs, calculate_mean_posts, calculate_mean_views, calculate_mean_reacts
+from preparation_data.functions import date_ago
+from graph_functions.metrics import calculate_mean_max_subs, calculate_mean_posts, calculate_mean_views, calculate_mean_reacts
 from graph_functions.fig_posts_inds import create_fig_posts_inds
 from graph_functions.fig_subs_inds import create_fig_subs_inds
 from graph_functions.fig_heatmap import create_heatmap
