@@ -1,6 +1,5 @@
 import datetime
 from dateutil.relativedelta import relativedelta
-#from dash import dcc, html, callback, Input, Output, State, dash_table
 from PIL import ImageColor
 import pandas as pd
 import random
@@ -175,9 +174,9 @@ def calculate_mean_reacts(gr_pvr, channel, react1='', perc1=0, react2='', perc2=
     return mean_reacts, mean_idx, react1, perc1, react2, perc2, react3, perc3
 
 
-def load_stopwords_from_file(file_path):
-    with open(file_path, 'r', encoding='utf-8') as file:
-        stopwords = [line.strip() for line in file]
-    return stopwords
+#def load_stopwords_from_file(file_path):
+#    with open(file_path, 'r', encoding='utf-8') as file:
+#        stopwords = [line.strip() for line in file]
+#    return stopwords
 
 
