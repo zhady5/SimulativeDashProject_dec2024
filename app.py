@@ -17,7 +17,7 @@ from graph_functions.fig_table_top5 import create_table_top5
 
 
 bgcolor = '#ffb347'
-word_color = '#666'
+word_color = '#333'
 
 st.set_page_config(layout="wide", page_icon="📊",)
 # Стили заголовков и подзаголовков
