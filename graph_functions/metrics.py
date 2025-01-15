@@ -24,7 +24,7 @@ def calculate_mean_max_subs(subs, channel):
         # Максимальный дневной отток
         
         return mean_subs_pos, mean_subs_neg, max_subs_pos, max_subs_neg
-    exept:
+    except:
         return 0,0,0,0
 
 #-----------------------------Метрики по публикациям-------------------------------------------------------------------------
