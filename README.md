@@ -1,27 +1,27 @@
 SimulativeDashProject_dec2024/
 
 ├── .github/workflows/      # Конфигурации GitHub Actions
-
+|   |
 │   └── main.yml            # Основной файл конфигурации CI/CD
-
+|
 ├── graph_functions/        # Функции для создания графиков
-
+|   |
 │   └── **init**.py         # Инициализация модуля графических функций
-
+|
 ├── preparation_data/       # Скрипты обработки данных
-
+|   |
 │   └── data_processing.py  # Основной скрипт обработки данных
-
+|
 ├── prepared_tables/        # Обработанные таблицы
-
+|   |
 │   └── table_day_views.csv # Пример обработанной таблицы
-
+|
 ├── app.py                  # Основной файл приложения
-
+|
 ├── Procfile                # Конфигурация для развертывания (например, на Heroku)
-
+|
 ├── requirements.txt        # Список зависимостей Python
-
+|
 └── stopwords-ru.txt        # Список стоп-слов для русского языка
 
 
