@@ -95,6 +95,13 @@ def create_table_top5(posts, subs, gr_pvr,  channel, bgcolor='#FFA500', word_col
     df_cols = ['channel_name', 'post_id','post_datetime', 'current_views', 
              'react_cnt_sum', 'idx_active']
     df = gr_pvr[df_cols][gr_pvr.channel_name == channel].sort_values(by='current_views', ascending=False).drop_duplicates()
+
+    if df.shape[0]==0:
+        df_cols_pw = ['channel_name', 'post_id','post_datetime', 'current_views']
+        df = post_view[df_cols_pw][post_view.channel_name == channel].sort_values(by='current_views', ascending=False).drop_duplicates()
+        df = pd.concat([pd.DataFrame(columns=df_cols), df], axis=0)
+        for c in ['current_views', 'react_cnt_sum', 'idx_active']:
+            df[c] = df[c].astype(float)
     
     top5 = create_rows5(df, get_top, post_subs_changes, 'subs_change_pos')
     bottom5 = create_rows5(df, get_bottom, post_subs_changes, 'subs_change_neg', 0)
