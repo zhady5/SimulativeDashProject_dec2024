@@ -24,7 +24,7 @@ metrics_number_color = 'brown' # цвет цифр у метрик
 
 graph_color='#F5DEB3'
 color_Nx_size='#8B4513' # цвет для выделения N-кратного значения в графике с постами
-
+color_neg_values = '#8B0000'
 
 colors_gradient_bubble = cl.scales['9']['seq']['OrRd'][::-1] # Создаем градиент для пузырькового графика
 
@@ -201,7 +201,7 @@ def main():
         # Кастомный CSS для скрытия подписей под слайдером
         st.markdown(""" <style> .stSlider .st-cl::after { content: ""; } </style> """, unsafe_allow_html=True)
         slider = create_slider(subs, selected_channel)
-        fig_subs_pos_neg = create_subs_pos_neg(subs, selected_channel, slider, bgcolor, word_color) 
+        fig_subs_pos_neg = create_subs_pos_neg(subs, selected_channel, slider, bgcolor, word_color, contr_color, graph_color, color_neg_values) 
         st.plotly_chart(fig_subs_pos_neg, use_container_width=True)
 
         #---------------------------------------------------------------------------------------------------------------------
