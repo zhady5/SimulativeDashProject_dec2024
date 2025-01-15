@@ -2,6 +2,8 @@ import pandas as pd
 import streamlit as st
 from datetime import date
 import colorlover as cl
+import matplotlib
+import matplotlib.pyplot as plt
 
 from preparation_data.data_processing import load_data, process_data
 from preparation_data.functions import date_ago, convert_date, get_gradient_color, get_current_previous_sums,  hex_to_rgb, \
@@ -27,6 +29,7 @@ color_Nx_size='#8B4513' # цвет для выделения N-кратного 
 color_neg_values = '#8B0000' # цвет для отписавшихся подписчиков
 max_color_heatmap = "#006a4e" # цвет для наличия постов в матрице для графика публикаций
 colors_gradient_bubble = cl.scales['9']['seq']['OrRd'][::-1] # Создаем градиент для пузырькового графика
+cmap_colors = matplotlib.cm.autumn # градиент для топ5 постов по разным параметрам
 
 #для примера другие градиенты
 #cl.scales['9']['seq']['YlGnBu']: Палитра с переходами от желтого через зеленый и синий до темно-синего.
@@ -326,7 +329,7 @@ def main():
     
     #---------------------------------------------------------------------------------------------------------------------
     #Таблица с постами Лидеры и оутсайдеры
-    st.pyplot(create_table_top5(posts, subs, gr_pvr,  selected_channel, bgcolor, word_color))
+    st.pyplot(create_table_top5(posts, subs, gr_pvr,  selected_channel, bgcolor, word_color, cmap_colors))
 
          
 
