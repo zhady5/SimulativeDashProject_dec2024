@@ -244,7 +244,7 @@ def main():
         if isinstance(fig_bubble, go.Figure):
             st.plotly_chart(fig_bubble, use_container_width=True)
         else:
-            st.write({})
+            st.write('график не собрался')
         
     with col2:
         #---------------------------------------------------------------------------------------------------------------------
