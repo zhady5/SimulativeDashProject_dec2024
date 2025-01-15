@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
 
-def create_subs_pos_neg(subs, channel, date_range, bgcolor='#ffb347', word_color = '#666'):
+def create_subs_pos_neg(subs, channel, date_range, bgcolor='#ffb347', word_color = '#666', contr_color='#f5dfbf', graph_color='#F5DEB3', color_neg_values = '#8B0000'):
     if channel is None or date_range is None:
         st.write({})  # Вывод пустой фигуры
         return
@@ -35,10 +35,10 @@ def create_subs_pos_neg(subs, channel, date_range, bgcolor='#ffb347', word_color
 
     fig = go.Figure()
     fig.add_trace(go.Bar(x=filtered_df_uniq['date'], y=filtered_df_uniq['day_change_pos'], 
-                         marker_color='#F5DEB3', 
+                         marker_color=graph_color, 
                          hovertemplate='%{x} <br>Подписались: %{y} <extra></extra>'))
     fig.add_trace(go.Bar(x=filtered_df_uniq['date'], y=filtered_df_uniq['day_change_neg'], 
-                         marker_color='#8B0000', 
+                         marker_color=color_neg_values, 
                          hovertemplate='%{x} <br>Отписались: %{y}<extra></extra>'))
 
     fig.update_layout(
@@ -54,10 +54,10 @@ def create_subs_pos_neg(subs, channel, date_range, bgcolor='#ffb347', word_color
         title = '',
         xaxis=dict(
             rangeselector=dict(
-                bgcolor= '#f5dfbf',
-                font=dict(color="#333"),
-                activecolor= '#ffb347',
-                bordercolor='#f5dfbf',                
+                bgcolor= contr_color,
+                font=dict(color=word_color),
+                activecolor= bgcolor,
+                bordercolor=contr_color,                
                 buttons=list([
                     dict(count=3, label="3д", step="day", stepmode="backward"),
                     dict(count=7, label="1н", step="day", stepmode="backward"),
