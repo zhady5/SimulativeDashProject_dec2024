@@ -9,7 +9,7 @@ import datetime
 import colorlover as cl
 
 
-def create_bubble_fig(filtered_df, bgcolor = '#ffb347', word_color = '#666'):
+def create_bubble_fig(filtered_df, bgcolor = '#ffb347', word_color = '#666', colors = cl.scales['9']['seq']['OrRd'][::-1] ):
 #table
         gr_pvr_sum = filtered_df.drop(['reaction_type', 'react_cnt'], axis=1).drop_duplicates()
     
@@ -17,7 +17,7 @@ def create_bubble_fig(filtered_df, bgcolor = '#ffb347', word_color = '#666'):
             return {}
         
         # Создаем градиент 
-        colors = cl.scales['9']['seq']['OrRd'][::-1] 
+        #colors = cl.scales['9']['seq']['OrRd'][::-1] 
         
     # Предположим, что у тебя уже есть DataFrame под названием gr_pvr_sum
         fig = go.Figure()
