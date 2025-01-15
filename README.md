@@ -13,6 +13,22 @@ SimulativeDashProject_dec2024/
 └── stopwords-ru.txt        # Список стоп-слов для русского языка
 
 
+
+SimulativeDashProject_dec2024/
+├── .github/workflows/
+│   └── main.yml
+├── graph_functions/
+│   └── __init__.py
+├── preparation_data/
+│   └── data_processing.py
+├── prepared_tables/
+│   └── table_day_views.csv
+├── app.py
+├── Procfile
+├── requirements.txt
+└── stopwords-ru.txt
+
+
 ## Требования
 
 - Python 3.7 или выше
