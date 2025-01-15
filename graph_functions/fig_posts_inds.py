@@ -7,9 +7,17 @@ from preparation_data.functions import get_current_previous_sums
 
 
 def create_fig_posts_inds(posts, selected_channel, bgcolor='#ffb347', word_color = '#666', contr_color = '#f5dfbf', graph_color='#F5DEB3', color_Nx_size='#8B4513'):
-    
-    # График по публикациям
+    if selected_channel is None:
+        st.write({})  # Вывод пустой фигуры
+        return
+
     subdf_posts = posts[posts.channel_name == selected_channel][['channel_name', 'date', 'cnt']].drop_duplicates()
+
+    # Проверяем, что дата присутствует и не пуста
+    if len(subdf_posts) == 0 or 'date' not in subdf_posts.columns or 'cnt' not in subdf_posts.columns:
+        st.write({})
+        return
+    
     
     # Создание subplots
     fig_posts = make_subplots(
