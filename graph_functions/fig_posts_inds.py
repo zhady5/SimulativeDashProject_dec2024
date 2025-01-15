@@ -6,7 +6,7 @@ import streamlit as st
 from preparation_data.functions import get_current_previous_sums
 
 
-def create_fig_posts_inds(posts, selected_channel, bgcolor='#ffb347', word_color = '#666', graph_color='#F5DEB3', color_Nx_size='#8B4513'):
+def create_fig_posts_inds(posts, selected_channel, bgcolor='#ffb347', word_color = '#666', contr_color = '#f5dfbf', graph_color='#F5DEB3', color_Nx_size='#8B4513'):
     
     # График по публикациям
     subdf_posts = posts[posts.channel_name == selected_channel][['channel_name', 'date', 'cnt']].drop_duplicates()
