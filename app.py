@@ -4,6 +4,7 @@ from datetime import date
 import colorlover as cl
 import matplotlib
 import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 
 from preparation_data.data_processing import load_data, process_data
 from preparation_data.functions import date_ago
