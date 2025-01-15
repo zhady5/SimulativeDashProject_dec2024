@@ -20,6 +20,7 @@ bgcolor =  '#ffb347' # фон дашборда и графиков
 contr_color = '#f5dfbf' #более светлый цвет для всех графиков и обводок кнопок
 word_color = '#333' #'#666' цвет шрифтов для всех текстов
 metrics_number_color = 'brown' # цвет цифр у метрик
+colors_gradient_bubble = cl.scales['9']['seq']['OrRd'][::-1] # Создаем градиент для пузырькового графика
 
 st.set_page_config(layout="wide", page_icon="📊",)
 # Стили заголовков и подзаголовков
@@ -218,7 +219,7 @@ def main():
         else:  # "all (6м)"
             filtered_bubble = gr_pvr[(gr_pvr.channel_name == selected_channel)&(pd.to_datetime(gr_pvr.post_datetime)>=date_ago('months', 6))]
         
-        fig_bubble = create_bubble_fig(filtered_bubble, bgcolor, word_color)
+        fig_bubble = create_bubble_fig(filtered_bubble, bgcolor, word_color, colors_gradient_bubble)
         st.plotly_chart(fig_bubble, use_container_width=True)
         
     with col2:
