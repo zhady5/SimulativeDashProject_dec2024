@@ -216,7 +216,7 @@ def main():
         else:  # "all (6м)"
             filtered_bubble = gr_pvr[(gr_pvr.channel_name == selected_channel)&(pd.to_datetime(gr_pvr.post_datetime)>=date_ago('months', 6))]
         
-        fig_bubble = create_bubble_fig(filtered_bubble) #, bgcolor, word_color
+        fig_bubble = create_bubble_fig(filtered_bubble, bgcolor, word_color)
         st.plotly_chart(fig_bubble, use_container_width=True)
         
     with col2:
@@ -266,7 +266,7 @@ def main():
                                 (pd.to_datetime(posts.date) >= date_ago('months', 6))]
 
         # Отображение тепловой карты
-        st.plotly_chart(create_heatmap(filtered_df), use_container_width=True) #, bgcolor, word_color
+        st.plotly_chart(create_heatmap(filtered_df, bgcolor, word_color), use_container_width=True)
 
 
         #---------------------------------------------------------------------------------------------------------------------
