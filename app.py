@@ -22,6 +22,7 @@ contr_color = '#f5dfbf' #более светлый цвет для всех гр
 word_color = '#333' #'#666' цвет шрифтов для всех текстов
 metrics_number_color = 'brown' # цвет цифр у метрик
 
+graph_color='#F5DEB3'
 color_Nx_size='#8B4513' # цвет для выделения N-кратного значения в графике с постами
 
 colors_gradient_bubble = cl.scales['9']['seq']['OrRd'][::-1] # Создаем градиент для пузырькового графика
@@ -179,7 +180,7 @@ def main():
     # БЛОК 3
     #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    fig_posts = create_fig_posts_inds(posts, selected_channel, bgcolor, word_color, contr_color, color_Nx_size) #
+    fig_posts = create_fig_posts_inds(posts, selected_channel, bgcolor, word_color, graph_color, color_Nx_size) #
     fig_subs = create_fig_subs_inds(subs, selected_channel, bgcolor, word_color) #, bgcolor, word_color
     # 
     col1, gap_col, col2 = st.columns([0.47, 0.06, 0.47])
