@@ -130,7 +130,7 @@ def main():
         # облако слов
         if selected_channel:
             df_words = prepare_data(posts, selected_channel)
-            image = make_image(df_words, contr_color, start_color_words, end_color_words)
+            image = make_image(df_words, contr_color, 21)
             st.image(image, use_column_width=True)
 
     #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
