@@ -1,12 +1,12 @@
 SimulativeDashProject_dec2024/
 
-├── .github/workflows/      # Конфигурации GitHub Actions
+├── `.github/workflows/`      # Конфигурации GitHub Actions
 
-│   └── main.yml            # Основной файл конфигурации CI/CD
+│   └── `main.yml`            # Основной файл конфигурации CI/CD
 
-├── graph_functions/        # Функции для создания графиков
+├── `graph_functions/`        # Функции для создания графиков
 
-│   └── **init**.py         # Инициализация модуля графических функций
+│   └── `**init**.py`         # Инициализация модуля графических функций
 
 ├── preparation_data/       # Скрипты обработки данных
 
