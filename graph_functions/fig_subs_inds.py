@@ -6,7 +6,7 @@ import streamlit as st
 from preparation_data.functions import get_current_previous_sums
 
 
-def create_fig_subs_inds(subs, selected_channel, bgcolor='#ffb347', word_color = '#666', contr_color='#f5dfbf', line_color='#F5DEB3'):
+def create_fig_subs_inds(subs, selected_channel, bgcolor='#ffb347', word_color = '#666', contr_color='#f5dfbf', graph_color='#F5DEB3'):
     
     # График по подписчикам
     subdf_subs = subs[subs.channel_name == selected_channel][['channel_name', 'date', 'subs_cnt', 'subs_change']].drop_duplicates()
@@ -30,7 +30,7 @@ def create_fig_subs_inds(subs, selected_channel, bgcolor='#ffb347', word_color =
     #                          hovertemplate='%{x} <br>Подписчиков: %{y}<extra></extra>'), row=1, col=1)
 
     fig_subs.add_trace(go.Scatter(x=subdf_subs.date, y=subdf_subs.subs_cnt, fill='tozeroy', mode='lines+markers'
-                                  , line_color=line_color, marker_color=contr_color, marker_line_color='contr_color
+                                  , line_color=graph_color, marker_color=contr_color, marker_line_color=contr_color
                                   , marker_line_width=1,  marker_size=5,
                               hovertemplate='%{x} <br>Подписчиков: %{y}<extra></extra>'), row=1, col=1)
     
