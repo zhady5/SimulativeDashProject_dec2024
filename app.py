@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
 from datetime import date
+import colorlover as cl
 
 from preparation_data.data_processing import load_data, process_data
 from preparation_data.functions import date_ago, convert_date, get_gradient_color, get_current_previous_sums,  hex_to_rgb, \
