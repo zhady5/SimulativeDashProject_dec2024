@@ -303,8 +303,9 @@ def main():
                 st.error("Номер ID не найден.")
 
     
-
-    st.pyplot(create_table_top5(posts, subs, gr_pvr,  selected_channel)) #, bgcolor, word_color
+    #---------------------------------------------------------------------------------------------------------------------
+    #Таблица с постами Лидеры и оутсайдеры
+    st.pyplot(create_table_top5(posts, subs, gr_pvr,  selected_channel, bgcolor, word_color))
 
          
 
