@@ -32,6 +32,8 @@ colors_gradient_bubble = cl.scales['9']['seq']['OrRd'][::-1] # Создаем г
 
 min_color_heatmap = '#F5DEB3' # цвет для отсутсвия постов в матрице для графика публикаций
 max_color_heatmap = "#006a4e" # цвет для наличия постов в матрице для графика публикаций
+start_color_words = '#8B0000'
+end_color_words = '#ffb347'
 
 
 st.set_page_config(layout="wide", page_icon="📊",)
@@ -128,7 +130,7 @@ def main():
         # облако слов
         if selected_channel:
             df_words = prepare_data(posts, selected_channel)
-            image = make_image(df_words)
+            image = make_image(df_words, contr_color, start_color_words, end_color_words)
             st.image(image, use_column_width=True)
 
     #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
