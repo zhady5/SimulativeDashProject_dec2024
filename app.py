@@ -22,14 +22,14 @@ from graph_functions.fig_table_top5 import create_table_top5
 bgcolor =  '#ffb347' # фон дашборда и графиков
 contr_color = '#f5dfbf' #более светлый цвет для всех графиков и обводок кнопок
 word_color = '#333' #'#666' цвет шрифтов для всех текстов
-metrics_number_color = 'brown' # цвет цифр у метрик
 
-graph_color='#F5DEB3'
+metrics_number_color = 'brown' # цвет цифр у метрик
+graph_color='#F5DEB3' # светлый цвет для всех графиокв и таблиц
 color_Nx_size='#8B4513' # цвет для выделения N-кратного значения в графике с постами
-color_neg_values = '#8B0000' # цвет для отписавшихся подписчиков
+dark_color = '#8B0000' # цвет для отписавшихся подписчиков и для заголовков в таблице с просмотрами по дням
 max_color_heatmap = "#006a4e" # цвет для наличия постов в матрице для графика публикаций
-colors_gradient_bubble = cl.scales['9']['seq']['OrRd'][::-1] # Создаем градиент для пузырькового графика
 cmap_colors = matplotlib.cm.autumn # градиент для топ5 постов по разным параметрам
+colors_gradient_bubble = cl.scales['9']['seq']['OrRd'][::-1] # Создаем градиент для пузырькового графика
 
 #для примера другие градиенты
 #cl.scales['9']['seq']['YlGnBu']: Палитра с переходами от желтого через зеленый и синий до темно-синего.
@@ -203,7 +203,7 @@ def main():
         # Кастомный CSS для скрытия подписей под слайдером
         st.markdown(""" <style> .stSlider .st-cl::after { content: ""; } </style> """, unsafe_allow_html=True)
         slider = create_slider(subs, selected_channel)
-        fig_subs_pos_neg = create_subs_pos_neg(subs, selected_channel, slider, bgcolor, word_color, contr_color, graph_color, color_neg_values) 
+        fig_subs_pos_neg = create_subs_pos_neg(subs, selected_channel, slider, bgcolor, word_color, contr_color, graph_color, dark_color) 
         st.plotly_chart(fig_subs_pos_neg, use_container_width=True)
 
         #---------------------------------------------------------------------------------------------------------------------
@@ -305,7 +305,7 @@ def main():
         
         df = table_views(table_day_views, days_to_show, selected_channel) 
         df_subset = df[columns_to_show]
-        html_table = styled_df(df_subset).to_html()
+        html_table = styled_df(df_subset, dark_color).to_html()
         # Оборачиваем таблицу в div с фиксированной шириной и прокруткой
         scrollable_table = f'<div style="overflow-x: auto; overflow-y: auto; max-height: 500px;">{html_table}</div>'
         st.write(scrollable_table, unsafe_allow_html=True)
