@@ -7,7 +7,7 @@ import streamlit as st
 #from functions import get_current_previous_sums, date_ago
 import datetime
 
-def create_heatmap(filtered_df, bgcolor = '#ffb347',  word_color = "#212121", min_color = '#F5DEB3', max_color = "#006a4e"):
+def create_heatmap(filtered_df, bgcolor = '#ffb347',  word_color = "#212121", min_color_heatmap = '#F5DEB3', max_color_heatmap = "#006a4e"):
     
     # Генерация данных
     filtered_df = filtered_df[['date', 'hour', 'cnt']].rename(columns={'cnt': 'publications'}).sort_values('date')
@@ -40,7 +40,7 @@ def create_heatmap(filtered_df, bgcolor = '#ffb347',  word_color = "#212121", mi
                 z=z_values,
                 x=x_labels,
                 y=y_labels,
-                colorscale= [[0,  min_color], [0.0000000001, max_color], [1, max_color]], #[[0, '#F5DEB3'], [1, '#8B0000' ]],
+                colorscale= [[0,  min_color_heatmap], [0.0000000001, max_color_heatmap], [1, max_color_heatmap]], #[[0, '#F5DEB3'], [1, '#8B0000' ]],
                 showscale=False,
                 xgap=10,
                 ygap=10,
