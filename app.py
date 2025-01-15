@@ -37,15 +37,15 @@ st.markdown(f"""
     .subheader h2 {{
         font-family: 'Open Sans', sans-serif;
         font-size: 16px;
-        background-color: #ffb347;
+        background-color: {bgcolor};
         line-height: 24px;
-        color: #666;
+        color: {word_color};
         margin-top: 0px;
         margin-bottom: 0px;
         font-weight: bold;
     }}
 
-    .custom-text {{ color: #666; 
+    .custom-text {{ color: {word_color}; 
                    font-size: 13px; 
                    }} 
     .custom-number {{ color: brown; 
@@ -55,7 +55,7 @@ st.markdown(f"""
     .stApp {{
         max-width: 1200px;
         margin: 0 auto;
-        background-color: #ffb347;
+        background-color: {bgcolor};
         padding: 0rem;
         box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }}
@@ -66,9 +66,9 @@ st.markdown(f"""
         margin-bottom: 0px;
     }}
     .stButton > button {{
-        background-color: #ffb347;
+        background-color: {bgcolor};
         border-color: #f5dfbf;
-        color: #666;
+        color: {word_color};
         border: 2px solid #f5dfbf;
         border-radius: 20px;
         padding: 0px 8px;
@@ -80,12 +80,12 @@ st.markdown(f"""
     .stButton > button:hover {{
         background-color: #f5dfbf;
         border-color: #f5dfbf;
-        color: #666;
+        color: {word_color};
     }}
     .stButton > button:active {{
         background-color: #f5dfbf;
         border-color: #f5dfbf;
-        color: #666;
+        color: {word_color};
     }}
 </style>
 """, unsafe_allow_html=True)
@@ -159,8 +159,8 @@ def main():
     # БЛОК 3
     #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    fig_posts = create_fig_posts_inds(posts, selected_channel)
-    fig_subs = create_fig_subs_inds(subs, selected_channel)
+    fig_posts = create_fig_posts_inds(posts, selected_channel, bgcolor, word_color)
+    fig_subs = create_fig_subs_inds(subs, selected_channel, bgcolor, word_color)
     # 
     col1, gap_col, col2 = st.columns([0.47, 0.06, 0.47])
     with col1:
@@ -179,7 +179,7 @@ def main():
         # Кастомный CSS для скрытия подписей под слайдером
         st.markdown(""" <style> .stSlider .st-cl::after { content: ""; } </style> """, unsafe_allow_html=True)
         slider = create_slider(subs, selected_channel)
-        fig_subs_pos_neg = create_subs_pos_neg(subs, selected_channel, slider) #, slider
+        fig_subs_pos_neg = create_subs_pos_neg(subs, selected_channel, slider, bgcolor, word_color) #, slider
         st.plotly_chart(fig_subs_pos_neg, use_container_width=True)
 
         #---------------------------------------------------------------------------------------------------------------------
@@ -216,7 +216,7 @@ def main():
         else:  # "all (6м)"
             filtered_bubble = gr_pvr[(gr_pvr.channel_name == selected_channel)&(pd.to_datetime(gr_pvr.post_datetime)>=date_ago('months', 6))]
         
-        fig_bubble = create_bubble_fig(filtered_bubble)
+        fig_bubble = create_bubble_fig(filtered_bubble, bgcolor, word_color)
         st.plotly_chart(fig_bubble, use_container_width=True)
         
     with col2:
@@ -266,7 +266,7 @@ def main():
                                 (pd.to_datetime(posts.date) >= date_ago('months', 6))]
 
         # Отображение тепловой карты
-        st.plotly_chart(create_heatmap(filtered_df), use_container_width=True)
+        st.plotly_chart(create_heatmap(filtered_df, bgcolor, word_color), use_container_width=True)
 
 
         #---------------------------------------------------------------------------------------------------------------------
@@ -304,7 +304,7 @@ def main():
 
     
 
-    st.pyplot(create_table_top5(posts, subs, gr_pvr,  selected_channel, bgcolor))
+    st.pyplot(create_table_top5(posts, subs, gr_pvr,  selected_channel, bgcolor, word_color))
 
          
 
