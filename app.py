@@ -332,7 +332,7 @@ def main():
     
     #---------------------------------------------------------------------------------------------------------------------
     #Таблица с постами Лидеры и оутсайдеры
-    st.pyplot(create_table_top5(posts, subs, gr_pvr,  selected_channel, bgcolor, word_color, cmap_colors))
+    st.pyplot(create_table_top5(posts, post_view, subs, gr_pvr,  selected_channel, bgcolor, word_color, cmap_colors))
 
          
 
