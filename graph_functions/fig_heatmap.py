@@ -8,10 +8,19 @@ import streamlit as st
 import datetime
 
 def create_heatmap(filtered_df, bgcolor = '#ffb347',  word_color = "#212121", min_color_heatmap = '#F5DEB3', max_color_heatmap = "#006a4e"):
+    # Проверяем, что дата присутствует и не пуста
+    if len(filtered_df) == 0:
+        st.write({})
+        return
     
     # Генерация данных
     filtered_df = filtered_df[['date', 'hour', 'cnt']].rename(columns={'cnt': 'publications'}).sort_values('date')
     raw_index = filtered_df.set_index(['date', 'hour'])
+
+    # Проверяем, что дата присутствует и не пуста
+    if len(filtered_df) == 0:
+        st.write({})
+        return
     
     dates = pd.to_datetime(filtered_df.date).unique().tolist()
     index = pd.MultiIndex.from_product([filtered_df.date.unique(), range(1, 25)], names=['date', 'hour'])
