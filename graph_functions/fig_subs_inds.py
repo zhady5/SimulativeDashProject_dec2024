@@ -7,9 +7,18 @@ from preparation_data.functions import get_current_previous_sums
 
 
 def create_fig_subs_inds(subs, selected_channel, bgcolor='#ffb347', word_color = '#666', contr_color='#f5dfbf', graph_color='#F5DEB3'):
+    if selected_channel is None:
+        st.write({})  # Вывод пустой фигуры
+        return
+
+    subdf_subs = subs[subs.channel_name == selected_channel][['channel_name', 'date', 'subs_cnt', 'subs_change']].drop_duplicates()
+
+    # Проверяем, что дата присутствует и не пуста
+    if len(subdf_subs) == 0 or 'date' not in subdf_subs.columns or 'subs_cnt' not in subdf_subs.columns:
+        st.write({})
+        return
     
     # График по подписчикам
-    subdf_subs = subs[subs.channel_name == selected_channel][['channel_name', 'date', 'subs_cnt', 'subs_change']].drop_duplicates()
     
     # Создание subplots
     fig_subs = make_subplots(
