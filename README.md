@@ -1,3 +1,6 @@
+## Дашборд можно посмотреть тут: [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://simulativedashprojectdec2024.streamlit.app/)  
+
+
 ### SimulativeDashProject_dec2024/
 
 ├── `.github/workflows/`      # Конфигурации GitHub Actions
@@ -56,4 +59,4 @@
 
 Проект использует GitHub Actions для автоматизации процессов: `.github/workflows/main.yml
 
-## Дашборд можно посмотреть тут: [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://simulativedashprojectdec2024.streamlit.app/)  
+
