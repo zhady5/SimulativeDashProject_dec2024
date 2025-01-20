@@ -19,7 +19,7 @@ from graph_functions.fig_image import make_image, prepare_data
 from graph_functions.fig_table_top5 import create_table_top5
 
 
-bgcolor =  '#ffb347' # фон дашборда и графиков
+bgcolor =  '#ff9600' #'#ffb347' # фон дашборда и графиков
 contr_color = '#f5dfbf' #более светлый цвет для всех графиков и обводок кнопок
 word_color = '#333' #'#666' цвет шрифтов для всех текстов
 
