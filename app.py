@@ -138,7 +138,7 @@ def main():
         if selected_channel:
             df_words = prepare_data(posts, selected_channel)
             image = make_image(df_words, contr_color, palette_num)
-            st.image(image, use_column_width=True)
+            st.image(image, use_container_width=True)
 
     #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # БЛОК 2
