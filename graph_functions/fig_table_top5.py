@@ -232,7 +232,7 @@ def create_table_top5(posts, post_view, subs, gr_pvr,  channel, bgcolor='#FFA500
     plt.text(0.5, 0.89, subtitle_text, transform=fig.transFigure, **subtitle_props)
     
     # Adding the footer text
-    footer_text = "Источник: Данные Telegram API \n Обработка данных и дашборд - Альмира (@a1m_ra), Парсинг даннх - Вероника (@chacter) "
+    footer_text = "Источник: Данные Telegram API \n Обработка данных и дашборд - Альмира (@a1m_ra), Парсинг данных - Вероника (@chacter) "
     footer_props = {'fontsize': 14, 'va': 'center', 'ha': 'center', 'color': word_color}
     # Adjusting the y-coordinate to position the footer closer to the bottom of the figure
     plt.text(0.5, 0.09, footer_text, transform=fig.transFigure, **footer_props)
