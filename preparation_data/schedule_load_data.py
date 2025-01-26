@@ -228,7 +228,7 @@ def job(repo_owner, repo_name, branch):
             "subscribers": "prepared_tables/subscribers.csv",
             "post_view": "prepared_tables/post_view.csv",
             "gr_pvr": "prepared_tables/gr_pvr.csv",
-            "table_day_views": "prepared_tables/table_day_views.csv",
+            "table_day_views": "prepared_tables/table_day_views2.csv",
         }
 
         for table, file_path in file_paths.items():
